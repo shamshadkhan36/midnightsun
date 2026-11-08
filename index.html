@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Midnight Sun Studios — Filmmaker, Cinematographer, Editor & Colorist</title>
+  <meta name="description" content="Midnight Sun Studios: The official portfolio of independent filmmaking, direction, cinematography, editing, writing, and master color grading." />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e6a73c'><circle cx='12' cy='12' r='8'/><path d='M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41'/></svg>" />
+
+  <!-- Google Fonts: Syne & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            midnight: {
+              950: '#06070a',
+              900: '#0b0d14',
+              850: '#111420',
+              800: '#181c2d',
+            },
+            cinematic: {
+              gold: '#e6a73c',
+              amber: '#f59e0b',
+              glow: 'rgba(230, 167, 60, 0.4)',
+            }
+          },
+          fontFamily: {
+            heading: ['Syne', 'sans-serif'],
+            body: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="bg-[#06070a] text-slate-100 antialiased selection:bg-amber-500/30 selection:text-amber-200">
+
+  <!-- Subtle Film Grain Overlay -->
+  <div class="film-grain" aria-hidden="true"></div>
+
+  <!-- Ambient Glow Accents -->
+  <div class="ambient-glow glow-gold w-[600px] h-[600px] -top-40 -left-40" aria-hidden="true"></div>
+  <div class="ambient-glow glow-cyan w-[500px] h-[500px] top-[40%] -right-40" aria-hidden="true"></div>
+
+  <!-- ======================================================================== -->
+  <!-- 1. HEADER (GLOBAL STICKY WIREFRAME NAVIGATION) -->
+  <!-- Matches reference: Logo Left | Center Nav Links | "Hire Me Now" CTA Right -->
+  <!-- ======================================================================== -->
+  <header id="mainNavbar" class="navbar-sticky">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      
+      <!-- Brand Logo / Monogram -->
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-amber-500 via-amber-400 to-yellow-200 p-[1.5px] shadow-lg shadow-amber-500/20 group-hover:shadow-amber-500/40 transition-shadow">
+          <div class="w-full h-full bg-[#06070a] rounded-full flex items-center justify-center">
+            <svg class="w-5 h-5 text-amber-400 transform group-hover:rotate-45 transition-transform duration-700" fill="currentColor" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="5"/>
+              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M5.64 18.36l-1.42 1.42M19.78 4.22l-1.42 1.42" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-heading font-extrabold text-lg tracking-wider text-white uppercase group-hover:text-amber-400 transition-colors">
+            MIDNIGHT SUN
+          </span>
+          <span class="text-[9px] uppercase font-mono tracking-[0.25em] text-gray-400 -mt-1">
+            STUDIOS • PORTFOLIO
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu (Matching Raaj Dhoundiyal Reference) -->
+      <nav class="hidden md:flex items-center gap-2 lg:gap-3">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="work.html" class="nav-link">My Works</a>
+        <a href="#colorlab" class="nav-link">Color Lab</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Right CTA: Exact reference wireframe "Hire Me Now" -->
+      <div class="hidden md:flex items-center gap-3">
+        <a href="contact.html" class="btn-primary text-xs py-2.5 px-6 uppercase tracking-wider font-bold">
+          <span>Hire Me Now</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/5" aria-label="Open navigation menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div id="drawerBackdrop" class="drawer-backdrop" aria-hidden="true"></div>
+  <aside id="mobileDrawer" class="mobile-drawer" aria-label="Mobile Navigation">
+    <div class="flex items-center justify-between pb-4 border-b border-white/10">
+      <span class="font-heading font-bold text-white text-base">MIDNIGHT SUN STUDIOS</span>
+      <button id="mobileMenuClose" class="p-2 text-gray-400 hover:text-white" aria-label="Close menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="flex flex-col gap-3 py-4">
+      <a href="index.html" class="mobile-nav-link text-white font-medium text-lg">Home</a>
+      <a href="about.html" class="mobile-nav-link text-gray-300 hover:text-amber-400 font-medium text-lg">About Me</a>
+      <a href="services.html" class="mobile-nav-link text-gray-300 hover:text-amber-400 font-medium text-lg">Services</a>
+      <a href="work.html" class="mobile-nav-link text-gray-300 hover:text-amber-400 font-medium text-lg">My Works</a>
+      <a href="#colorlab" class="mobile-nav-link text-gray-300 hover:text-amber-400 font-medium text-lg">Color Grading Lab</a>
+      <a href="contact.html" class="mobile-nav-link text-gray-300 hover:text-amber-400 font-medium text-lg">Contact</a>
+    </nav>
+    <div class="mt-auto pt-6 border-t border-white/10 space-y-3">
+      <a href="contact.html" class="btn-primary w-full text-center text-xs py-3 uppercase tracking-wider font-bold">
+        Hire Me Now
+      </a>
+      <p class="text-xs text-gray-400 text-center font-mono">contact@midnightsunstudios.com</p>
+    </div>
+  </aside>
+
+  <!-- ======================================================================== -->
+  <!-- 2. HERO SECTION (REFERENCE WIREFRAME) -->
+  <!-- Tagline: "A Journey From A Blank Slate To Our Extraordinary Story!" -->
+  <!-- Subtitle: Filmmaker, Cinematographer, Editor, Writer & Colorist -->
+  <!-- CTAs: "Hire Me Now" + "Explore My Works" / "Watch Showreel" -->
+  <!-- ======================================================================== -->
+  <section id="home" class="hero-wrapper relative z-10 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto w-full">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Hero Content -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="hero-badge">
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+            <span>Direction • Cinematography • Editing • Color Grading • Writing</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold font-heading text-white tracking-tight leading-[1.08]">
+            A Journey From A <span class="text-gradient">Blank Slate</span> To My Extraordinary Story!
+          </h1>
+
+          <p class="text-gray-300 text-base sm:text-lg max-w-2xl font-light leading-relaxed">
+            Welcome to <strong class="text-white font-medium">Midnight Sun Studios</strong>. Founded on raw, honest, and socially rooted storytelling, we provide end-to-end filmmaking expertise—from script conceptualization and camera capture to offline editing, audio mastering, and calibrated DaVinci Resolve color grading.
+          </p>
+
+          <!-- Reference CTAs -->
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <a href="contact.html" class="btn-primary py-3 px-8 text-sm sm:text-base uppercase tracking-wider font-bold">
+              <span>Hire Me Now</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+            
+            <a href="work.html" class="btn-secondary py-3 px-6 text-sm sm:text-base">
+              <span>Explore My Works</span>
+            </a>
+
+            <button id="btnOpenShowreel" class="btn-secondary py-3 px-5 text-sm sm:text-base group">
+              <div class="pulse-circle w-6 h-6 rounded-full bg-amber-400/20 text-amber-400 flex items-center justify-center mr-1">
+                <svg class="w-3 h-3 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+              <span>Showreel</span>
+            </button>
+          </div>
+
+          <!-- Highlight Counters (Wireframe) -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8 border-t border-white/10">
+            <div class="stat-box">
+              <div class="counter-number text-2xl sm:text-3xl font-heading font-bold text-amber-400" data-target="48" data-suffix="+">48+</div>
+              <div class="text-[11px] uppercase tracking-wider text-gray-400 mt-1">Projects Completed</div>
+            </div>
+            <div class="stat-box">
+              <div class="counter-number text-2xl sm:text-3xl font-heading font-bold text-white" data-target="240" data-suffix="m">240m</div>
+              <div class="text-[11px] uppercase tracking-wider text-gray-400 mt-1">Minutes Graded</div>
+            </div>
+            <div class="stat-box">
+              <div class="counter-number text-2xl sm:text-3xl font-heading font-bold text-amber-400" data-target="14" data-suffix="">14</div>
+              <div class="text-[11px] uppercase tracking-wider text-gray-400 mt-1">Festival Selections</div>
+            </div>
+            <div class="stat-box">
+              <div class="counter-number text-2xl sm:text-3xl font-heading font-bold text-white" data-target="100" data-suffix="%">100%</div>
+              <div class="text-[11px] uppercase tracking-wider text-gray-400 mt-1">Artistic Execution</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Hero Visual Teaser -->
+        <div class="lg:col-span-5 relative">
+          <div class="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-black/80 group">
+            <div class="aspect-[4/5] bg-slate-900 relative">
+              <img 
+                src="https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1000&auto=format&fit=crop" 
+                alt="Filmmaker directing on set" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#06070a] via-black/40 to-transparent"></div>
+              
+              <!-- Floating Overlay Badge -->
+              <div class="absolute top-4 left-4 glass-card px-3 py-1.5 border border-white/10 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+                <span class="text-xs font-mono font-medium text-gray-200 uppercase tracking-wider">ON SET • 24 FPS • 2.39:1</span>
+              </div>
+
+              <div class="absolute bottom-6 left-6 right-6">
+                <div class="inline-block px-2.5 py-1 rounded bg-amber-500/20 border border-amber-500/30 text-amber-400 text-xs font-mono mb-2">
+                  MIDNIGHT SUN STUDIOS
+                </div>
+                <h3 class="text-xl font-heading font-bold text-white leading-snug">
+                  "Honest Cinema Rooted In Raw Emotion."
+                </h3>
+                <p class="text-xs text-gray-300 mt-1">
+                  Inspired by mountain roots, indie resilience, and cutting-edge digital cinema.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================== -->
+  <!-- 3. ABOUT SECTION (REFERENCE WIREFRAME) -->
+  <!-- Background, Training (MAAC, SIFT, ZIMA), Vijesha Films banner, Awards -->
+  <!-- ======================================================================== -->
+  <section id="about" class="py-24 relative z-10 px-4 sm:px-6 lg:px-8 bg-[#090b12]/60 border-y border-white/5">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Visual Collage -->
+        <div class="lg:col-span-5 relative space-y-4">
+          <div class="rounded-2xl overflow-hidden border border-white/10 aspect-video relative shadow-xl">
+            <img 
+              src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=900&auto=format&fit=crop" 
+              alt="Himalayan mountain landscape cinematography" 
+              class="w-full h-full object-cover" 
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-4">
+              <span class="text-xs font-mono text-amber-300">Roots • Himalayan Landscapes & Raw Narratives</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div class="rounded-xl overflow-hidden border border-white/10 aspect-video relative">
+              <img 
+                src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=600&auto=format&fit=crop" 
+                alt="Color Grading suite" 
+                class="w-full h-full object-cover" 
+              />
+              <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                <span class="text-[11px] font-mono text-white bg-black/60 px-2 py-1 rounded">Color Suite</span>
+              </div>
+            </div>
+            <div class="rounded-xl overflow-hidden border border-white/10 aspect-video relative">
+              <img 
+                src="https://images.unsplash.com/photo-1514565131-fce0801e5785?q=80&w=600&auto=format&fit=crop" 
+                alt="Anamorphic cine lighting" 
+                class="w-full h-full object-cover" 
+              />
+              <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                <span class="text-[11px] font-mono text-white bg-black/60 px-2 py-1 rounded">Anamorphic Rig</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Content: The Story -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 text-xs font-mono text-amber-400 uppercase tracking-widest">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+            About Me & Studio Heritage
+          </div>
+
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-heading font-extrabold text-white tracking-tight leading-tight">
+            From A Mountain Ridge To The Global Screen.
+          </h2>
+
+          <p class="text-gray-300 text-base leading-relaxed">
+            Hailing from the serene valleys of Uttarakhand and refined across Mumbai’s film industry, <strong class="text-white">Midnight Sun Studios</strong> was established by a passionate multi-disciplinary filmmaker. With rigorous professional training in Cinematography, VFX Pro, Editing, and Master Color Grading from leading institutions—including <span class="text-amber-400">MAAC</span>, <span class="text-amber-400">Maharaja Agrasen College</span>, <span class="text-amber-400">SIFT (Mumbai)</span>, and <span class="text-amber-400">ZIMA (Mumbai)</span>—our approach bridges technical mastery with authentic human emotion.
+          </p>
+
+          <p class="text-gray-300 text-base leading-relaxed">
+            Since founding our independent production banner in 2019, we have directed and produced critically acclaimed projects:
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-gray-300 pt-2 font-mono">
+            <div class="p-3 rounded-lg bg-white/[0.03] border border-white/5 flex items-center gap-2">
+              <span class="text-amber-400 font-bold">★</span>
+              <span><strong>Parwaaz Ek Udaan</strong> – Best Trailer Winner, IFP 50-Hour Challenge</span>
+            </div>
+            <div class="p-3 rounded-lg bg-white/[0.03] border border-white/5 flex items-center gap-2">
+              <span class="text-amber-400 font-bold">★</span>
+              <span><strong>Glaani</strong> – Official Selection, Pune Short Film Festival</span>
+            </div>
+            <div class="p-3 rounded-lg bg-white/[0.03] border border-white/5 flex items-center gap-2">
+              <span class="text-amber-400 font-bold">★</span>
+              <span><strong>Mera Pahad Mera Himala</strong> – Zee Music Feature (8M+ Views)</span>
+            </div>
+            <div class="p-3 rounded-lg bg-white/[0.03] border border-white/5 flex items-center gap-2">
+              <span class="text-amber-400 font-bold">★</span>
+              <span><strong>Binsar Mahadev</strong> – Acclaimed Cultural Documentary</span>
+            </div>
+          </div>
+
+          <div class="pt-4 flex items-center gap-4">
+            <a href="about.html" class="btn-secondary text-xs py-2.5 px-5">
+              Read Full Biography & Story →
+            </a>
+            <a href="contact.html" class="btn-primary text-xs py-2.5 px-6 uppercase tracking-wider font-bold">
+              Hire Me Now
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================== -->
+  <!-- 4. SERVICES SECTION (REFERENCE WIREFRAME) -->
+  <!-- The 6 disciplines: Writing, Direction, Cinematography, Editing, Color Grading, Production Design -->
+  <!-- ======================================================================== -->
+  <section id="services" class="py-24 relative z-10 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto space-y-14">
+      
+      <div class="text-center max-w-3xl mx-auto space-y-4">
+        <div class="inline-flex items-center gap-2 text-xs font-mono text-amber-400 uppercase tracking-widest">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+          Core Disciplines
+        </div>
+        <h2 class="text-3xl sm:text-5xl font-heading font-extrabold text-white tracking-tight">
+          Services Offered
+        </h2>
+        <p class="text-gray-400 text-base">
+          From concept development to post-production delivery, we offer specialized services tailored for feature narratives, short films, music videos, and commercial campaigns.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Writing -->
+        <div class="glass-card p-7 space-y-4 flex flex-col justify-between">
+          <div class="space-y-3">
+            <span class="text-2xl font-mono font-bold text-amber-400/60">01</span>
+            <h3 class="text-xl font-heading font-bold text-white">Writing</h3>
+            <p class="text-sm text-gray-300 leading-relaxed">
+              Screenplays, narrative treatments, scene structures, and character arcs. Transforming raw prompts into shootable screenplays with poignant dialogues and visual rhythm.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-white/5">
+            <a href="services.html#writing" class="text-xs font-semibold text-amber-400 hover:underline">Learn More →</a>
+          </div>
+        </div>
+
+        <!-- Direction -->
+        <div class="glass-card p-7 space-y-4 flex flex-col justify-between">
+          <div class="space-y-3">
+            <span class="text-2xl font-mono font-bold text-amber-400/60">02</span>
+            <h3 class="text-xl font-heading font-bold text-white">Direction</h3>
+            <p class="text-sm text-gray-300 leading-relaxed">
+              Guiding vision, scene pacing, actor coaching, and visual execution for short films, music videos, documentaries, and commercials.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-white/5">
+            <a href="services.html#direction" class="text-xs font-semibold text-amber-400 hover:underline">Learn More →</a>
+          </div>
+        </div>
+
+        <!-- Cinematography / Camera -->
+        <div class="glass-card p-7 space-y-4 flex flex-col justify-between">
+          <div class="space-y-3">
+            <span class="text-2xl font-mono font-bold text-amber-400/60">03</span>
+            <h3 class="text-xl font-heading font-bold text-white">Cinematography / Camera</h3>
+            <p class="text-sm text-gray-300 leading-relaxed">
+              Large-format ARRI and RED digital capture, anamorphic lens craft, painterly lighting design, drone aerials, and fluid camera movement.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-white/5">
+            <a href="services.html#camera" class="text-xs font-semibold text-amber-400 hover:underline">Learn More →</a>
+          </div>
+        </div>
+
+        <!-- Video Editing -->
+        <div class="glass-card p-7 space-y-4 flex flex-col justify-between">
+          <div class="space-y-3">
+            <span class="text-2xl font-mono font-bold text-amber-400/60">04</span>
+            <h3 class="text-xl font-heading font-bold text-white">Video Editing</h3>
+            <p class="text-sm text-gray-300 leading-relaxed">
+              Narrative assembly, rhythmic montage, match cuts, pacing control, and multi-camera post-production conform workflows.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-white/5">
+            <a href="services.html#editing" class="text-xs font-semibold text-amber-400 hover:underline">Learn More →</a>
+          </div>
+        </div>
+
+        <!-- Color Grading -->
+        <div class="glass-card p-7 space-y-4 flex flex-col justify-between border-amber-500/30">
+          <div class="space-y-3">
+            <span class="text-2xl font-mono font-bold text-amber-400">05</span>
+            <h3 class="text-xl font-heading font-bold text-white">Color Grading</h3>
+            <p class="text-sm text-gray-300 leading-relaxed">
+              DaVinci Resolve Studio color science, ACEScc color management, custom film stock print emulation (Kodak 2383/Fuji), and HDR mastering.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-white/5">
+            <a href="#colorlab" class="text-xs font-semibold text-amber-400 hover:underline">Interactive Color Lab →</a>
+          </div>
+        </div>
+
+        <!-- Production Design -->
+        <div class="glass-card p-7 space-y-4 flex flex-col justify-between">
+          <div class="space-y-3">
+            <span class="text-2xl font-mono font-bold text-amber-400/60">06</span>
+            <h3 class="text-xl font-heading font-bold text-white">Production Design</h3>
+            <p class="text-sm text-gray-300 leading-relaxed">
+              Visual world-building, location styling, moodboard creation, authentic props, and aesthetic cohesion for period and contemporary films.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-white/5">
+            <a href="services.html#production-design" class="text-xs font-semibold text-amber-400 hover:underline">Learn More →</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="text-center pt-4">
+        <a href="services.html" class="btn-primary py-3 px-8 text-sm uppercase tracking-wider font-bold">
+          View Detailed Services Breakdown
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================================== -->
+  <!-- 5. "MY WORKS" PORTFOLIO GRID (REFERENCE WIREFRAME) -->
+  <!-- Filter Pills: (All) (Editing) (Direction) (Camera) (Writing) (Production Design) -->
+  <!-- Project Cards with Tag Pills, Title, Category & Detail View Trigger -->
+  <!-- ======================================================================== -->
+  <section id="works" class="py-24 relative z-10 px-4 sm:px-6 lg:px-8 bg-[#080a10]">
+    <div class="max-w-7xl mx-auto space-y-12">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div class="space-y-3">
+          <div class="inline-flex items-center gap-2 text-xs font-mono text-amber-400 uppercase tracking-widest">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+            Portfolio Showcase
+          </div>
+          <h2 class="text-3xl sm:text-5xl font-heading font-extrabold text-white tracking-tight">
+            My Works
+          </h2>
+          <p class="text-gray-400 text-sm sm:text-base max-w-xl">
+            Selected films, music videos, commercials, and color grading projects. Click any project to open full details.
+          </p>
+        </div>
+
+        <!-- Filter Pills matching wireframe -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="editing">Editing</button>
+          <button class="filter-btn" data-filter="direction">Direction</button>
+          <button class="filter-btn" data-filter="cinematography">Camera</button>
+          <button class="filter-btn" data-filter="color-grading">Color</button>
+          <button class="filter-btn" data-filter="music-video">Music Videos</button>
+          <button class="filter-btn" data-filter="commercials">Commercials</button>
+        </div>
+      </div>
+
+      <!-- Dynamic Portfolio Grid -->
+      <div id="portfolioGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Injected via main.js -->
+      </div>
+
+      <div class="text-center pt-6">
+        <a href="work.html" class="btn-secondary py-3 px-8 text-sm">
+          <span>View Master Filmography Page →</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================================== -->
+  <!-- 6. SIGNATURE INTERACTIVE COLOR LAB -->
+  <!-- Before (Camera RAW) vs After (Master Grade) Split Slider -->
+  <!-- ======================================================================== -->
+  <section id="colorlab" class="py-24 relative z-10 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#080a10] via-[#0e111a] to-[#080a10] border-y border-white/5">
+    <div class="max-w-7xl mx-auto space-y-12">
+      
+      <div class="text-center max-w-3xl mx-auto space-y-4">
+        <div class="inline-flex items-center gap-2 text-xs font-mono text-amber-400 uppercase tracking-widest">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+          Master Color Grading
+        </div>
+        <h2 class="text-3xl sm:text-5xl font-heading font-extrabold text-white tracking-tight">
+          The <span class="text-gradient">Color Grading</span> Lab
+        </h2>
+        <p class="text-gray-400 text-base">
+          Drag the interactive split handle to see how raw, flat camera sensor data is transformed into rich theatrical color.
+        </p>
+      </div>
+
+      <!-- Scene Switchers -->
+      <div class="flex justify-center gap-3 flex-wrap">
+        <button class="filter-btn active" data-grade-scene="landscape">
+          01. Alpine Horizon (Log-C vs 35mm Master)
+        </button>
+        <button class="filter-btn" data-grade-scene="portrait">
+          02. Narrative Portrait (Flat Redcode vs Warm Curve)
+        </button>
+        <button class="filter-btn" data-grade-scene="neon">
+          03. Neo-Tokyo Night (S-Log3 vs Split Tone)
+        </button>
+      </div>
+
+      <!-- Split Container -->
+      <div id="colorComparisonContainer" class="comparison-container">
+        <div id="imgGraded" class="after-image"></div>
+        <div class="comparison-badge badge-graded">
+          Final Master Grade (ACEScc)
+        </div>
+
+        <div id="comparisonBefore" class="before-image">
+          <div id="imgRaw" class="w-[980px] h-full bg-cover bg-center"></div>
+        </div>
+        <div class="comparison-badge badge-raw">
+          Camera RAW Sensor Log
+        </div>
+
+        <div id="comparisonHandle" class="comparison-slider-handle">
+          <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path d="M8 9l-3 3 3 3m8-6l3 3-3 3"/>
+          </svg>
+        </div>
+      </div>
+
+      <div id="colorSceneSpecs" class="text-center text-xs font-mono text-gray-400 max-w-2xl mx-auto p-3 rounded-lg bg-black/40 border border-white/5">
+        <!-- Loaded via color-slider.js -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================================== -->
+  <!-- 7. CTA BANNER (EXACT REFERENCE WIREFRAME) -->
+  <!-- "LET'S MAKE GREAT THINGS TOGETHER" -->
+  <!-- ======================================================================== -->
+  <section class="py-20 relative z-10 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-amber-600/10 via-amber-500/20 to-amber-600/10 border-y border-amber-500/20 text-center">
+    <div class="max-w-4xl mx-auto space-y-6">
+      <div class="inline-flex items-center gap-2 text-xs font-mono text-amber-400 uppercase tracking-widest">
+        Collaboration & Projects
+      </div>
+      <h2 class="text-4xl sm:text-6xl font-heading font-extrabold text-white tracking-tight">
+        Let’s Make Great Things Together!
+      </h2>
+      <p class="text-gray-300 text-base sm:text-lg max-w-2xl mx-auto">
+        Whether you are planning an independent short, a commercial shoot, or require high-end color grading and editing, our studio is ready to bring your vision to life.
+      </p>
+      <div class="pt-2">
+        <a href="contact.html" class="btn-primary py-3.5 px-10 text-base uppercase tracking-wider font-bold shadow-xl shadow-amber-500/30">
+          Hire Me Now
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================== -->
+  <!-- 8. CONTACT SECTION (REFERENCE WIREFRAME) -->
+  <!-- "HAVE A NEW PROJECT? WE'D LOVE TO HEAR FROM YOU" -->
+  <!-- Name, Email, Service, Message, [ SEND MESSAGE ], Direct Email -->
+  <!-- ======================================================================== -->
+  <section id="contact" class="py-24 relative z-10 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- Left Contact Info -->
+        <div class="lg:col-span-5 space-y-8">
+          <div class="space-y-4">
+            <div class="inline-flex items-center gap-2 text-xs font-mono text-amber-400 uppercase tracking-widest">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+              Get In Touch
+            </div>
+            <h2 class="text-3xl sm:text-5xl font-heading font-extrabold text-white tracking-tight">
+              Have A New Project? <br />
+              <span class="text-gradient">We’d Love To Hear From You.</span>
+            </h2>
+            <p class="text-gray-300 text-base leading-relaxed">
+              Reach out directly for freelance contracts, full film production packages, color grading bookings, or script consultations.
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <div class="glass-card p-5 flex items-start gap-4">
+              <div class="p-3 rounded-xl bg-amber-500/10 text-amber-400 mt-1">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              </div>
+              <div>
+                <span class="text-xs font-mono text-gray-400 uppercase">Direct Email</span>
+                <a href="mailto:contact@midnightsunstudios.com" class="block text-white font-medium hover:text-amber-400 transition-colors text-base">
+                  contact@midnightsunstudios.com
+                </a>
+              </div>
+            </div>
+
+            <div class="glass-card p-5 flex items-start gap-4">
+              <div class="p-3 rounded-xl bg-cyan-500/10 text-cyan-400 mt-1">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              </div>
+              <div>
+                <span class="text-xs font-mono text-gray-400 uppercase">Studio Headquarters</span>
+                <p class="text-white font-medium">
+                  Mumbai & Uttarakhand Field Base • Available Globally
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Socials -->
+          <div class="flex items-center gap-4 text-gray-400 pt-2">
+            <span class="text-xs font-mono uppercase text-gray-500">Channels:</span>
+            <a href="https://vimeo.com" target="_blank" rel="noopener" class="hover:text-amber-400 transition-colors" aria-label="Vimeo">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22.84 8.79c-.19 4.34-3.17 10.28-8.94 10.28-5.5 0-6.1-4.14-7.23-7.53C5.53 7.82 4.8 7.37 3.75 7.74L3 6.78C5.23 4.82 7.57 3.74 9.14 3.65c3.08-.18 4.14 2.12 4.41 4.79.46 3.69 1.15 6.07 2.45 6.07.96 0 2.12-1.74 2.22-3.19.18-2.31-.99-2.61-2.43-2.07.72-2.36 2.65-3.48 4.76-3.41 1.76.05 2.37 1.15 2.29 3.15z"/></svg>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" class="hover:text-amber-400 transition-colors" aria-label="YouTube">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="hover:text-amber-400 transition-colors" aria-label="Instagram">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener" class="hover:text-amber-400 transition-colors" aria-label="LinkedIn">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Inquiry Form -->
+        <div class="lg:col-span-7">
+          <div class="glass-card p-6 sm:p-10 relative">
+            <h3 class="text-2xl font-heading font-bold text-white mb-2">Message Me</h3>
+            <p class="text-xs text-gray-400 mb-6">Send an inquiry and let's bring your project to reality.</p>
+
+            <form id="inquiryForm" class="space-y-5">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div class="space-y-1.5">
+                  <label for="senderName" class="text-xs font-mono text-gray-300 uppercase">Your Name *</label>
+                  <input type="text" id="senderName" required placeholder="e.g. Vikram Sharma" class="form-input" />
+                </div>
+                <div class="space-y-1.5">
+                  <label for="senderEmail" class="text-xs font-mono text-gray-300 uppercase">Email Address *</label>
+                  <input type="email" id="senderEmail" required placeholder="name@domain.com" class="form-input" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div class="space-y-1.5">
+                  <label for="projectType" class="text-xs font-mono text-gray-300 uppercase">Service Required</label>
+                  <select id="projectType" class="form-select">
+                    <option value="direction">Direction</option>
+                    <option value="cinematography">Cinematography / Camera</option>
+                    <option value="editing">Editing</option>
+                    <option value="color">Color Grading</option>
+                    <option value="writing">Writing & Screenplay</option>
+                    <option value="production-design">Production Design</option>
+                    <option value="full">Full Film Production</option>
+                  </select>
+                </div>
+                <div class="space-y-1.5">
+                  <label for="projectBudget" class="text-xs font-mono text-gray-300 uppercase">Budget Tier</label>
+                  <select id="projectBudget" class="form-select">
+                    <option value="tier1">$5,000 – $15,000</option>
+                    <option value="tier2">$15,000 – $50,000</option>
+                    <option value="tier3">$50,000+</option>
+                    <option value="flexible">Exploring / Flexible</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="space-y-1.5">
+                <label for="senderMessage" class="text-xs font-mono text-gray-300 uppercase">Message Area *</label>
+                <textarea id="senderMessage" rows="4" required placeholder="Tell me about your project, references, and schedule..." class="form-textarea"></textarea>
+              </div>
+
+              <button type="submit" class="btn-primary w-full py-3.5 text-base font-bold uppercase tracking-wider">
+                <span>Send Message</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <line x1="22" y1="2" x2="11" y2="13"/>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                </svg>
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================== -->
+  <!-- 9. FOOTER (REFERENCE WIREFRAME) -->
+  <!-- © Copyright 2026, Midnight Sun Studios. All Rights Reserved. -->
+  <!-- ======================================================================== -->
+  <footer class="py-12 relative z-10 px-4 sm:px-6 lg:px-8 bg-[#040508] border-t border-white/5">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-gray-500">
+      
+      <div class="flex items-center gap-3">
+        <span class="font-heading font-bold text-white text-sm tracking-wider">MIDNIGHT SUN STUDIOS</span>
+        <span>•</span>
+        <span>Filmmaker Portfolio</span>
+      </div>
+
+      <div class="flex items-center gap-6">
+        <a href="index.html" class="hover:text-gray-300 transition-colors">Home</a>
+        <a href="about.html" class="hover:text-gray-300 transition-colors">About</a>
+        <a href="services.html" class="hover:text-gray-300 transition-colors">Services</a>
+        <a href="work.html" class="hover:text-gray-300 transition-colors">My Works</a>
+        <a href="contact.html" class="hover:text-gray-300 transition-colors">Contact</a>
+      </div>
+
+      <div>
+        <p>© Copyright 2026, Midnight Sun Studios. All Rights Reserved.</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Modals & Overlays -->
+  <div id="projectModalOverlay" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Project Details Modal">
+    <div class="modal-content">
+      <button id="projectModalClose" class="modal-close-btn" aria-label="Close modal">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+      <div id="projectModalBody">
+        <!-- Injected via modal.js with "← Back to All Projects" -->
+      </div>
+    </div>
+  </div>
+
+  <div id="showreelModalOverlay" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Showreel Player">
+    <div class="modal-content max-w-5xl bg-black border border-white/20">
+      <button id="showreelModalClose" class="modal-close-btn" aria-label="Close showreel">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+      <div class="p-4 sm:p-6 space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-xs font-mono text-amber-400">MIDNIGHT SUN STUDIOS</span>
+            <h3 class="text-xl sm:text-2xl font-heading font-bold text-white">Cinematic Showreel 2026</h3>
+          </div>
+          <span class="text-xs font-mono text-gray-400">4K DCI • 2.39:1 Anamorphic</span>
+        </div>
+        <div class="relative aspect-video rounded-xl overflow-hidden bg-black border border-white/10">
+          <video 
+            id="showreelVideoPlayer" 
+            class="w-full h-full object-cover" 
+            poster="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1200&auto=format&fit=crop" 
+            controls 
+            playsinline>
+            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="feedbackToast" class="toast" role="status" aria-live="polite">
+    <div class="p-1 rounded-full bg-amber-400/20 text-amber-400">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+    </div>
+    <span id="toastMessage" class="text-xs sm:text-sm font-medium"></span>
+  </div>
+
+  <!-- JS Scripts -->
+  <script src="js/portfolio-data.js"></script>
+  <script src="js/color-slider.js"></script>
+  <script src="js/modal.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
