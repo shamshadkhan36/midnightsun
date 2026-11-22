@@ -1,29 +1,283 @@
 /* ==========================================================================
-   MIDNIGHT SUN STUDIOS — ALIENADDA THEME INTERACTION ENGINE
-   Smooth Custom Cursor, Spatial Nodes Animation, Blur Reveals, Portfolio Grid
+   MIDNIGHT SUN STUDIOS — ALIENADDA SCROLL BLUR & SMOOTH SCROLL ENGINE
+   Lenis Momentum Scrolling, GSAP ScrollTrigger Blur-on-Scroll, Custom Cursor
    ========================================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
+  initLenisSmoothScroll();
   initCustomCursor();
   initNavbar();
-  initIntroTextAnimation();
-  initSpatialProcessNodes();
   renderPortfolio("all");
   initFilterButtons();
+  initAlienaddaScrollBlurAnimations();
+  initSpatialProcessNodes();
   initContactForm();
   initStatsObserver();
   initMobileMenu();
 });
 
 /* --------------------------------------------------------------------------
-   1. CUSTOM SMOOTH CURSOR (ALIENADDA IMPLEMENTATION)
+   1. LENIS SMOOTH MOMENTUM SCROLLING (ALIENADDA LERP INERTIA)
+   -------------------------------------------------------------------------- */
+let lenis = null;
+function initLenisSmoothScroll() {
+  if (typeof Lenis !== "undefined") {
+    try {
+      lenis = new Lenis({
+        lerp: 0.08,
+        duration: 1.4,
+        smoothWheel: true,
+        smoothTouch: false,
+      });
+
+      if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+        gsap.registerPlugin(ScrollTrigger);
+        lenis.on("scroll", ScrollTrigger.update);
+        gsap.ticker.add((time) => {
+          lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
+      } else {
+        function raf(time) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+      }
+    } catch (err) {
+      console.warn("Lenis init fallback:", err);
+    }
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. ALIENADDA SCROLL BLUR ANIMATIONS (GSAP SCROLLTRIGGER)
+   -------------------------------------------------------------------------- */
+function initAlienaddaScrollBlurAnimations() {
+  if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
+    initScrollBlurFallback();
+    return;
+  }
+
+  // 1. Hero Section Scroll Blur Out (Alienadda Hero.tsx scrub blur)
+  const heroContent = document.querySelector(".hero-content-wrapper");
+  const heroBg = document.querySelector(".hero-fullframe-bg");
+  
+  if (heroContent) {
+    gsap.to(heroContent, {
+      scrollTrigger: {
+        trigger: "#home",
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
+      opacity: 0,
+      y: 90,
+      scale: 0.88,
+      filter: "blur(16px)",
+      ease: "none",
+    });
+  }
+
+  if (heroBg) {
+    gsap.to(heroBg, {
+      scrollTrigger: {
+        trigger: "#home",
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
+      scale: 1.15,
+      filter: "blur(22px) brightness(50%)",
+      ease: "none",
+    });
+  }
+
+  // 2. Intro Statement Word-by-Word Blur Reveal (Alienadda Intro.tsx)
+  const words = document.querySelectorAll(".intro-word");
+  if (words.length) {
+    gsap.fromTo(words,
+      { opacity: 0.1, y: 25, filter: "blur(10px)" },
+      {
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+        duration: 1,
+        stagger: 0.05,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: "#intro",
+          start: "top 75%",
+          end: "bottom 30%",
+          toggleActions: "play reverse play reverse",
+        }
+      }
+    );
+  }
+
+  // 3. About Section Portrait & Content Blur-to-Focus (Alienadda About.tsx)
+  const portrait = document.getElementById("aboutPortrait");
+  if (portrait) {
+    gsap.fromTo(portrait,
+      { opacity: 0.2, scale: 1.15, filter: "blur(20px)" },
+      {
+        opacity: 1,
+        scale: 1,
+        filter: "blur(0px)",
+        scrollTrigger: {
+          trigger: "#about",
+          start: "top 75%",
+          end: "center center",
+          scrub: 1,
+        }
+      }
+    );
+  }
+
+  const aboutText = document.querySelector("#about .z-10");
+  if (aboutText) {
+    gsap.fromTo(aboutText,
+      { opacity: 0.2, y: 40, filter: "blur(12px)" },
+      {
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+        scrollTrigger: {
+          trigger: "#about",
+          start: "top 70%",
+          end: "top 30%",
+          scrub: 1,
+        }
+      }
+    );
+  }
+
+  // 4. Services Section Cards Blur Scrub
+  const serviceCards = document.querySelectorAll("#services .glass-card");
+  serviceCards.forEach((card) => {
+    gsap.fromTo(card,
+      { opacity: 0.2, y: 50, filter: "blur(14px)" },
+      {
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+        scrollTrigger: {
+          trigger: card,
+          start: "top 88%",
+          end: "top 55%",
+          scrub: 1,
+        }
+      }
+    );
+  });
+
+  // 5. The Sculpting Process Spatial Nodes Blur (Alienadda Process.tsx)
+  const processItems = gsap.utils.toArray(".process-item");
+  processItems.forEach((item) => {
+    gsap.fromTo(item,
+      { opacity: 0, scale: 0.85, filter: "blur(14px)" },
+      {
+        opacity: 1,
+        scale: 1,
+        filter: "blur(0px)",
+        scrollTrigger: {
+          trigger: "#process",
+          start: "top 75%",
+          end: "bottom 35%",
+          toggleActions: "play reverse play reverse",
+        }
+      }
+    );
+  });
+
+  // 6. Portfolio Cards Blur Scrub (Alienadda Projects.tsx)
+  initPortfolioCardsBlur();
+
+  // 7. Color Lab Container Blur Scrub
+  const colorContainer = document.getElementById("colorComparisonContainer");
+  if (colorContainer) {
+    gsap.fromTo(colorContainer,
+      { opacity: 0.3, scale: 0.95, filter: "blur(16px)" },
+      {
+        opacity: 1,
+        scale: 1,
+        filter: "blur(0px)",
+        scrollTrigger: {
+          trigger: colorContainer,
+          start: "top 85%",
+          end: "top 50%",
+          scrub: 1,
+        }
+      }
+    );
+  }
+
+  // 8. Contact Section Enter The World Blur Reveal (Alienadda Contact.tsx)
+  const contactTargets = document.querySelectorAll("#contact .text-center, #contact .glass-card");
+  contactTargets.forEach((target) => {
+    gsap.fromTo(target,
+      { opacity: 0.2, y: 40, filter: "blur(16px)" },
+      {
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+        scrollTrigger: {
+          trigger: target,
+          start: "top 85%",
+          end: "top 45%",
+          scrub: 1,
+        }
+      }
+    );
+  });
+}
+
+function initPortfolioCardsBlur() {
+  if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+  const cards = document.querySelectorAll("#portfolioGrid .project-card");
+  cards.forEach((card) => {
+    gsap.fromTo(card,
+      { opacity: 0.25, y: 50, filter: "blur(14px)", scale: 0.95 },
+      {
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+        scale: 1,
+        scrollTrigger: {
+          trigger: card,
+          start: "top 88%",
+          end: "top 55%",
+          scrub: 1,
+        }
+      }
+    );
+  });
+}
+
+/* Fallback if GSAP is offline */
+function initScrollBlurFallback() {
+  const elements = document.querySelectorAll(".hero-content-wrapper, .intro-word, #aboutPortrait, #services .glass-card, #portfolioGrid .project-card, .process-item");
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.filter = "blur(0px)";
+        entry.target.style.opacity = "1";
+        entry.target.style.transform = "none";
+      }
+    });
+  }, { threshold: 0.2 });
+
+  elements.forEach(el => observer.observe(el));
+}
+
+/* --------------------------------------------------------------------------
+   3. CUSTOM SMOOTH CURSOR (ALIENADDA MIX-BLEND-DIFFERENCE)
    -------------------------------------------------------------------------- */
 function initCustomCursor() {
   const cursor = document.getElementById("customCursor");
   const dot = document.getElementById("customCursorDot");
   if (!cursor || !dot) return;
 
-  // Check if fine pointer (mouse)
   if (!window.matchMedia("(pointer: fine)").matches) {
     cursor.style.display = "none";
     dot.style.display = "none";
@@ -42,14 +296,11 @@ function initCustomCursor() {
     mouseY = e.clientY;
   }, { passive: true });
 
-  // Smooth lerp loop
   function renderCursor() {
-    // Lerp for outer ring
     cursorX += (mouseX - cursorX) * 0.15;
     cursorY += (mouseY - cursorY) * 0.15;
     cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
 
-    // Immediate or tight lerp for inner dot
     dotX += (mouseX - dotX) * 0.45;
     dotY += (mouseY - dotY) * 0.45;
     dot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0) translate(-50%, -50%)`;
@@ -58,7 +309,6 @@ function initCustomCursor() {
   }
   requestAnimationFrame(renderCursor);
 
-  // Expand cursor on interactive hoverables
   const hoverTargets = 'a, button, input, select, textarea, [role="button"], .project-card, .process-item, .filter-btn, .comparison-container';
   
   document.addEventListener("mouseover", (e) => {
@@ -75,7 +325,7 @@ function initCustomCursor() {
 }
 
 /* --------------------------------------------------------------------------
-   2. NAVBAR SCROLL
+   4. NAVBAR SCROLL
    -------------------------------------------------------------------------- */
 function initNavbar() {
   const navbar = document.getElementById("mainNavbar");
@@ -94,40 +344,14 @@ function initNavbar() {
 }
 
 /* --------------------------------------------------------------------------
-   3. INTRO STATEMENT BLUR-TO-FOCUS WORD ANIMATION (ALIENADDA SCENE)
-   -------------------------------------------------------------------------- */
-function initIntroTextAnimation() {
-  const container = document.getElementById("introStatementText");
-  if (!container) return;
-
-  const words = container.querySelectorAll(".intro-word");
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        words.forEach((word, index) => {
-          setTimeout(() => {
-            word.style.opacity = "1";
-            word.style.filter = "blur(0px)";
-            word.style.transform = "translateY(0)";
-          }, index * 45);
-        });
-      }
-    });
-  }, { threshold: 0.3 });
-
-  observer.observe(container);
-}
-
-/* --------------------------------------------------------------------------
-   4. SPATIAL FLOATING PROCESS NODES (ALIENADDA SCULPTING PROCESS)
+   5. SPATIAL FLOATING PROCESS NODES (ALIENADDA PROCESS.TSX)
    -------------------------------------------------------------------------- */
 function initSpatialProcessNodes() {
   const items = document.querySelectorAll(".process-item");
   if (!items.length) return;
 
   items.forEach((item, index) => {
-    // Subtle organic floating motion
-    const speed = 2.5 + (index % 3) * 0.8;
+    const speed = 2.2 + (index % 3) * 0.7;
     const distance = 8 + (index % 4) * 3;
     
     let time = index * 40;
@@ -143,7 +367,7 @@ function initSpatialProcessNodes() {
 }
 
 /* --------------------------------------------------------------------------
-   5. PORTFOLIO GRID & RENDERING
+   6. PORTFOLIO GRID & RENDERING
    -------------------------------------------------------------------------- */
 function renderPortfolio(filterCategory = "all") {
   const container = document.getElementById("portfolioGrid");
@@ -156,7 +380,7 @@ function renderPortfolio(filterCategory = "all") {
 
   if (filtered.length === 0) {
     container.innerHTML = `
-      <div class="col-span-full py-16 text-center text-white/40 tracking-widest text-xs uppercase">
+      <div class="col-span-full py-16 text-center text-white/40 tracking-widest text-xs uppercase font-mono">
         <p>No projects match this category at present.</p>
         <button onclick="renderPortfolio('all')" class="mt-4 btn-secondary text-[10px]">View All</button>
       </div>
@@ -181,31 +405,36 @@ function renderPortfolio(filterCategory = "all") {
               <div class="flex flex-wrap items-center mb-1">
                 ${rolesMarkup}
               </div>
-              <h3 class="text-xl md:text-2xl font-bold tracking-[0.2em] text-white uppercase group-hover:text-white transition-colors">
+              <h3 class="text-xl md:text-2xl font-black tracking-[0.2em] text-white uppercase group-hover:text-amber-300 transition-colors">
                 ${project.title}
               </h3>
-              <p class="text-xs text-white/60 line-clamp-1 mt-1 font-light tracking-wider italic">
+              <p class="text-xs text-white/70 line-clamp-1 mt-1 font-light tracking-wider italic">
                 ${project.tagline}
               </p>
             </div>
           </div>
-          <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity bg-black/80 backdrop-blur-md rounded-full p-2.5 text-white border border-white/20">
+          <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity bg-black/80 backdrop-blur-md rounded-full p-2.5 text-amber-400 border border-amber-400/30">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path d="M15 3h6v6M10 14L21 3M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
             </svg>
           </div>
         </div>
-        <div class="p-4 bg-black flex justify-between items-center text-[10px] uppercase tracking-widest text-white/40 border-t border-white/5 font-mono">
+        <div class="p-4 bg-[#030611] flex justify-between items-center text-[10px] uppercase tracking-widest text-white/50 border-t border-white/5 font-mono">
           <span>${project.client}</span>
-          <span class="text-white/70">${project.duration}</span>
+          <span class="text-amber-400/90">${project.duration}</span>
         </div>
       </article>
     `;
   }).join("");
+
+  // Re-initialize blur scrub for newly injected cards
+  setTimeout(() => {
+    initPortfolioCardsBlur();
+  }, 100);
 }
 
 /* --------------------------------------------------------------------------
-   6. CATEGORY FILTER BUTTONS
+   7. CATEGORY FILTER BUTTONS
    -------------------------------------------------------------------------- */
 function initFilterButtons() {
   const buttons = document.querySelectorAll(".filter-btn");
@@ -220,7 +449,7 @@ function initFilterButtons() {
 }
 
 /* --------------------------------------------------------------------------
-   7. CONTACT INQUIRY FORM
+   8. CONTACT FORM
    -------------------------------------------------------------------------- */
 function initContactForm() {
   const form = document.getElementById("inquiryForm");
@@ -251,7 +480,7 @@ function initContactForm() {
       if (submitBtn) {
         submitBtn.disabled = false;
         submitBtn.innerHTML = `
-          <span>Enter The World</span>
+          <span>Send Production Inquiry</span>
           <svg class="w-3.5 h-3.5 ml-2 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>
@@ -265,7 +494,7 @@ function initContactForm() {
   function showToast(text, isError = false) {
     if (!toast || !toastMessage) return;
     toastMessage.textContent = text;
-    toast.style.borderColor = isError ? "rgba(239, 68, 68, 0.5)" : "rgba(255, 255, 255, 0.5)";
+    toast.style.borderColor = isError ? "rgba(239, 68, 68, 0.6)" : "var(--accent-gold)";
     toast.classList.add("show");
 
     setTimeout(() => {
@@ -275,7 +504,7 @@ function initContactForm() {
 }
 
 /* --------------------------------------------------------------------------
-   8. STATS COUNTERS
+   9. STATS OBSERVER
    -------------------------------------------------------------------------- */
 function initStatsObserver() {
   const statNumbers = document.querySelectorAll(".counter-number");
@@ -314,7 +543,7 @@ function initStatsObserver() {
 }
 
 /* --------------------------------------------------------------------------
-   9. MOBILE MENU
+   10. MOBILE MENU
    -------------------------------------------------------------------------- */
 function initMobileMenu() {
   const menuBtn = document.getElementById("mobileMenuBtn");
