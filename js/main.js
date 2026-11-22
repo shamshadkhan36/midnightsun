@@ -1,18 +1,82 @@
 /* ==========================================================================
-   MIDNIGHT SUN STUDIOS — MAIN APPLICATION CONTROLLER
+   MIDNIGHT SUN STUDIOS — ALIENADDA THEME INTERACTION ENGINE
+   Smooth Custom Cursor, Spatial Nodes Animation, Blur Reveals, Portfolio Grid
    ========================================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
+  initCustomCursor();
   initNavbar();
+  initIntroTextAnimation();
+  initSpatialProcessNodes();
   renderPortfolio("all");
   initFilterButtons();
-  renderTestimonials();
   initContactForm();
   initStatsObserver();
   initMobileMenu();
 });
 
-/* Navbar Scrolled State */
+/* --------------------------------------------------------------------------
+   1. CUSTOM SMOOTH CURSOR (ALIENADDA IMPLEMENTATION)
+   -------------------------------------------------------------------------- */
+function initCustomCursor() {
+  const cursor = document.getElementById("customCursor");
+  const dot = document.getElementById("customCursorDot");
+  if (!cursor || !dot) return;
+
+  // Check if fine pointer (mouse)
+  if (!window.matchMedia("(pointer: fine)").matches) {
+    cursor.style.display = "none";
+    dot.style.display = "none";
+    return;
+  }
+
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let cursorX = mouseX;
+  let cursorY = mouseY;
+  let dotX = mouseX;
+  let dotY = mouseY;
+
+  window.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  }, { passive: true });
+
+  // Smooth lerp loop
+  function renderCursor() {
+    // Lerp for outer ring
+    cursorX += (mouseX - cursorX) * 0.15;
+    cursorY += (mouseY - cursorY) * 0.15;
+    cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
+
+    // Immediate or tight lerp for inner dot
+    dotX += (mouseX - dotX) * 0.45;
+    dotY += (mouseY - dotY) * 0.45;
+    dot.style.transform = `translate3d(${dotX}px, ${dotY}px, 0) translate(-50%, -50%)`;
+
+    requestAnimationFrame(renderCursor);
+  }
+  requestAnimationFrame(renderCursor);
+
+  // Expand cursor on interactive hoverables
+  const hoverTargets = 'a, button, input, select, textarea, [role="button"], .project-card, .process-item, .filter-btn, .comparison-container';
+  
+  document.addEventListener("mouseover", (e) => {
+    if (e.target.closest(hoverTargets)) {
+      cursor.classList.add("cursor-hover");
+    }
+  });
+
+  document.addEventListener("mouseout", (e) => {
+    if (e.target.closest(hoverTargets)) {
+      cursor.classList.remove("cursor-hover");
+    }
+  });
+}
+
+/* --------------------------------------------------------------------------
+   2. NAVBAR SCROLL
+   -------------------------------------------------------------------------- */
 function initNavbar() {
   const navbar = document.getElementById("mainNavbar");
   if (!navbar) return;
@@ -29,38 +93,58 @@ function initNavbar() {
   onScroll();
 }
 
-/* Mobile Drawer */
-function initMobileMenu() {
-  const menuBtn = document.getElementById("mobileMenuBtn");
-  const closeBtn = document.getElementById("mobileMenuClose");
-  const drawer = document.getElementById("mobileDrawer");
-  const backdrop = document.getElementById("drawerBackdrop");
-  const links = document.querySelectorAll(".mobile-nav-link");
+/* --------------------------------------------------------------------------
+   3. INTRO STATEMENT BLUR-TO-FOCUS WORD ANIMATION (ALIENADDA SCENE)
+   -------------------------------------------------------------------------- */
+function initIntroTextAnimation() {
+  const container = document.getElementById("introStatementText");
+  if (!container) return;
 
-  if (!menuBtn || !drawer || !backdrop) return;
+  const words = container.querySelectorAll(".intro-word");
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        words.forEach((word, index) => {
+          setTimeout(() => {
+            word.style.opacity = "1";
+            word.style.filter = "blur(0px)";
+            word.style.transform = "translateY(0)";
+          }, index * 45);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
 
-  const openDrawer = () => {
-    drawer.classList.add("open");
-    backdrop.classList.add("active");
-    document.body.style.overflow = "hidden";
-  };
+  observer.observe(container);
+}
 
-  const closeDrawer = () => {
-    drawer.classList.remove("open");
-    backdrop.classList.remove("active");
-    document.body.style.overflow = "";
-  };
+/* --------------------------------------------------------------------------
+   4. SPATIAL FLOATING PROCESS NODES (ALIENADDA SCULPTING PROCESS)
+   -------------------------------------------------------------------------- */
+function initSpatialProcessNodes() {
+  const items = document.querySelectorAll(".process-item");
+  if (!items.length) return;
 
-  menuBtn.addEventListener("click", openDrawer);
-  if (closeBtn) closeBtn.addEventListener("click", closeDrawer);
-  backdrop.addEventListener("click", closeDrawer);
-
-  links.forEach(link => {
-    link.addEventListener("click", closeDrawer);
+  items.forEach((item, index) => {
+    // Subtle organic floating motion
+    const speed = 2.5 + (index % 3) * 0.8;
+    const distance = 8 + (index % 4) * 3;
+    
+    let time = index * 40;
+    function animateNode() {
+      time += 0.02;
+      const offsetY = Math.sin(time * speed) * distance;
+      const offsetX = Math.cos(time * (speed * 0.7)) * (distance * 0.5);
+      item.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0)`;
+      requestAnimationFrame(animateNode);
+    }
+    requestAnimationFrame(animateNode);
   });
 }
 
-/* Render Portfolio Grid */
+/* --------------------------------------------------------------------------
+   5. PORTFOLIO GRID & RENDERING
+   -------------------------------------------------------------------------- */
 function renderPortfolio(filterCategory = "all") {
   const container = document.getElementById("portfolioGrid");
   if (!container) return;
@@ -72,9 +156,9 @@ function renderPortfolio(filterCategory = "all") {
 
   if (filtered.length === 0) {
     container.innerHTML = `
-      <div class="col-span-full py-16 text-center text-gray-400">
-        <p class="text-lg">No projects match this category at present.</p>
-        <button onclick="renderPortfolio('all')" class="mt-4 btn-secondary text-xs">View All Works</button>
+      <div class="col-span-full py-16 text-center text-white/40 tracking-widest text-xs uppercase">
+        <p>No projects match this category at present.</p>
+        <button onclick="renderPortfolio('all')" class="mt-4 btn-secondary text-[10px]">View All</button>
       </div>
     `;
     return;
@@ -97,30 +181,32 @@ function renderPortfolio(filterCategory = "all") {
               <div class="flex flex-wrap items-center mb-1">
                 ${rolesMarkup}
               </div>
-              <h3 class="text-xl font-heading text-white tracking-tight group-hover:text-amber-400 transition-colors">
+              <h3 class="text-xl md:text-2xl font-bold tracking-[0.2em] text-white uppercase group-hover:text-white transition-colors">
                 ${project.title}
               </h3>
-              <p class="text-xs text-gray-300 line-clamp-1 mt-1 font-normal">
+              <p class="text-xs text-white/60 line-clamp-1 mt-1 font-light tracking-wider italic">
                 ${project.tagline}
               </p>
             </div>
           </div>
-          <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity bg-black/60 backdrop-blur-md rounded-full p-2 text-amber-400">
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity bg-black/80 backdrop-blur-md rounded-full p-2.5 text-white border border-white/20">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path d="M15 3h6v6M10 14L21 3M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
             </svg>
           </div>
         </div>
-        <div class="p-4 bg-[#0d0f19] flex justify-between items-center text-xs text-gray-400 border-t border-white/5">
+        <div class="p-4 bg-black flex justify-between items-center text-[10px] uppercase tracking-widest text-white/40 border-t border-white/5 font-mono">
           <span>${project.client}</span>
-          <span class="font-mono text-amber-400/90">${project.duration}</span>
+          <span class="text-white/70">${project.duration}</span>
         </div>
       </article>
     `;
   }).join("");
 }
 
-/* Category Filter Buttons */
+/* --------------------------------------------------------------------------
+   6. CATEGORY FILTER BUTTONS
+   -------------------------------------------------------------------------- */
 function initFilterButtons() {
   const buttons = document.querySelectorAll(".filter-btn");
   buttons.forEach(btn => {
@@ -133,35 +219,9 @@ function initFilterButtons() {
   });
 }
 
-/* Render Testimonials */
-function renderTestimonials() {
-  const container = document.getElementById("testimonialsGrid");
-  if (!container) return;
-
-  const list = window.studioTestimonials || [];
-  container.innerHTML = list.map(item => `
-    <div class="glass-card p-6 md:p-8 flex flex-col justify-between">
-      <div class="space-y-4">
-        <div class="flex text-amber-400 gap-1">
-          ${Array(5).fill('<svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>').join('')}
-        </div>
-        <p class="text-gray-300 text-sm md:text-base italic leading-relaxed">
-          "${item.quote}"
-        </p>
-      </div>
-      <div class="flex items-center gap-3 pt-6 border-t border-white/5 mt-6">
-        <img src="${item.avatar}" alt="${item.author}" class="w-12 h-12 rounded-full object-cover border border-amber-400/30" loading="lazy" />
-        <div>
-          <h4 class="text-white font-medium text-sm">${item.author}</h4>
-          <p class="text-xs text-amber-400/80 font-normal">${item.designation}</p>
-          <p class="text-[11px] text-gray-500">${item.company}</p>
-        </div>
-      </div>
-    </div>
-  `).join("");
-}
-
-/* Contact Form Submission */
+/* --------------------------------------------------------------------------
+   7. CONTACT INQUIRY FORM
+   -------------------------------------------------------------------------- */
 function initContactForm() {
   const form = document.getElementById("inquiryForm");
   const toast = document.getElementById("feedbackToast");
@@ -174,19 +234,16 @@ function initContactForm() {
 
     const name = document.getElementById("senderName")?.value || "";
     const email = document.getElementById("senderEmail")?.value || "";
-    const service = document.getElementById("projectType")?.value || "film";
-    const budget = document.getElementById("projectBudget")?.value || "Flexible";
-    const message = document.getElementById("senderMessage")?.value || "";
 
     if (!name.trim() || !email.trim()) {
-      showToast("Please provide your name and a valid email address.", true);
+      showToast("Please provide your name and email.", true);
       return;
     }
 
     const submitBtn = form.querySelector("button[type='submit']");
     if (submitBtn) {
       submitBtn.disabled = true;
-      submitBtn.innerText = "Dispatching Vision Brief...";
+      submitBtn.innerText = "TRANSMITTING TO STUDIO...";
     }
 
     setTimeout(() => {
@@ -194,21 +251,21 @@ function initContactForm() {
       if (submitBtn) {
         submitBtn.disabled = false;
         submitBtn.innerHTML = `
-          <span>Send Production Inquiry</span>
-          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <line x1="22" y1="2" x2="11" y2="13"/>
-            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          <span>Enter The World</span>
+          <svg class="w-3.5 h-3.5 ml-2 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
         `;
       }
-      showToast(`Thank you, ${name}! Midnight Sun Studios has received your inquiry. We will contact you within 24 hours.`, false);
+      showToast(`Vision brief received from ${name}. We will connect shortly.`, false);
     }, 1000);
   });
 
   function showToast(text, isError = false) {
     if (!toast || !toastMessage) return;
     toastMessage.textContent = text;
-    toast.style.borderColor = isError ? "var(--accent-crimson)" : "var(--accent-gold)";
+    toast.style.borderColor = isError ? "rgba(239, 68, 68, 0.5)" : "rgba(255, 255, 255, 0.5)";
     toast.classList.add("show");
 
     setTimeout(() => {
@@ -217,7 +274,9 @@ function initContactForm() {
   }
 }
 
-/* Stats Counter Animation */
+/* --------------------------------------------------------------------------
+   8. STATS COUNTERS
+   -------------------------------------------------------------------------- */
 function initStatsObserver() {
   const statNumbers = document.querySelectorAll(".counter-number");
   if (!statNumbers.length) return;
@@ -252,4 +311,37 @@ function initStatsObserver() {
       }
     }, stepTime);
   }
+}
+
+/* --------------------------------------------------------------------------
+   9. MOBILE MENU
+   -------------------------------------------------------------------------- */
+function initMobileMenu() {
+  const menuBtn = document.getElementById("mobileMenuBtn");
+  const closeBtn = document.getElementById("mobileMenuClose");
+  const drawer = document.getElementById("mobileDrawer");
+  const backdrop = document.getElementById("drawerBackdrop");
+  const links = document.querySelectorAll(".mobile-nav-link");
+
+  if (!menuBtn || !drawer || !backdrop) return;
+
+  const openDrawer = () => {
+    drawer.classList.add("open");
+    backdrop.classList.add("active");
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeDrawer = () => {
+    drawer.classList.remove("open");
+    backdrop.classList.remove("active");
+    document.body.style.overflow = "";
+  };
+
+  menuBtn.addEventListener("click", openDrawer);
+  if (closeBtn) closeBtn.addEventListener("click", closeDrawer);
+  backdrop.addEventListener("click", closeDrawer);
+
+  links.forEach(link => {
+    link.addEventListener("click", closeDrawer);
+  });
 }
