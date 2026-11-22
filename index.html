@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth bg-black">
+<html lang="en" class="scroll-smooth bg-[#020409]">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MIDNIGHT SUN STUDIOS | Filmmaking, Direction & Color Science</title>
-  <meta name="description" content="Cinematic portfolio of Midnight Sun Studios. Direction, Cinematography, Editing, Master Color Grading, and Visual World Building." />
+  <title>MIDNIGHT SUN STUDIOS | Direction, Cinematography & Color Science</title>
+  <meta name="description" content="Official cinematic portfolio of Midnight Sun Studios. Independent filmmaking, direction, cinematography, editing, and master color grading." />
   
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/images/favicon.png" />
   <link rel="apple-touch-icon" href="assets/images/favicon.png" />
 
-  <!-- Google Fonts: Syne & Plus Jakarta Sans / Inter -->
+  <!-- Google Fonts: Inter & Plus Jakarta Sans (Modern Geometric Sans) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700&family=Syne:wght@500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -22,12 +22,21 @@
       theme: {
         extend: {
           colors: {
-            black: '#000000',
-            void: '#040406',
+            midnight: {
+              950: '#020409',
+              900: '#050a18',
+              850: '#0a1226',
+              800: '#0f1a36',
+            },
+            gold: {
+              400: '#fbbf24',
+              500: '#e6a73c',
+              600: '#d97706',
+            }
           },
           fontFamily: {
             sans: ['Inter', 'Plus Jakarta Sans', 'sans-serif'],
-            heading: ['Syne', 'sans-serif'],
+            heading: ['Inter', 'Plus Jakarta Sans', 'sans-serif'],
             mono: ['JetBrains Mono', 'monospace'],
           }
         }
@@ -35,21 +44,21 @@
     }
   </script>
 
-  <!-- Alienadda Cinematic Theme CSS -->
+  <!-- Custom Stylesheet -->
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body class="bg-black text-white antialiased selection:bg-white/20 selection:text-white">
+<body class="bg-[#020409] text-white antialiased selection:bg-amber-500/30 selection:text-white">
 
-  <!-- Custom Smooth Follower Cursor (Alienadda mix-blend-difference) -->
+  <!-- Custom Smooth Follower Cursor with Gold & White Difference -->
   <div id="customCursor" aria-hidden="true"></div>
   <div id="customCursorDot" aria-hidden="true"></div>
 
-  <!-- Noise Overlay (Alienadda texture) -->
+  <!-- Noise Overlay Texture -->
   <div class="noise-overlay" aria-hidden="true"></div>
 
-  <!-- Ambient Void Light Glow -->
-  <div class="ambient-glow-orb w-[650px] h-[650px] top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2" aria-hidden="true"></div>
-  <div class="ambient-glow-orb w-[500px] h-[500px] top-[70%] left-1/4" aria-hidden="true"></div>
+  <!-- Ambient Midnight Navy & Gold Light Orbs -->
+  <div class="ambient-navy-orb w-[700px] h-[700px] top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2" aria-hidden="true"></div>
+  <div class="ambient-gold-orb w-[500px] h-[500px] top-[60%] right-1/4" aria-hidden="true"></div>
 
   <!-- ======================================================================== -->
   <!-- 1. HEADER (GLOBAL MINIMALIST NAVIGATION) -->
@@ -67,7 +76,7 @@
           />
         </div>
         <div class="flex flex-col">
-          <span class="font-heading font-extrabold text-sm tracking-[0.3em] text-white uppercase group-hover:text-amber-200 transition-colors">
+          <span class="font-heading font-extrabold text-sm tracking-[0.28em] text-white uppercase group-hover:text-amber-300 transition-colors">
             MIDNIGHT SUN
           </span>
           <span class="text-[8px] uppercase font-mono tracking-[0.45em] text-white/50 -mt-0.5">
@@ -90,7 +99,7 @@
 
       <!-- Right Action CTA -->
       <div class="hidden md:flex items-center gap-3">
-        <a href="#contact" class="btn-primary text-[10px] py-2 px-5 tracking-[0.3em] uppercase">
+        <a href="#contact" class="btn-primary text-[10px] py-2.5 px-6 tracking-[0.25em] uppercase font-bold">
           Enter The World
         </a>
       </div>
@@ -115,7 +124,7 @@
         <div class="w-8 h-8 rounded-full overflow-hidden border border-amber-400/40">
           <img src="assets/images/logo-emblem.jpeg" alt="Midnight Sun Studios" class="w-full h-full object-cover" />
         </div>
-        <span class="font-heading font-bold text-white text-xs tracking-[0.3em] uppercase">MIDNIGHT SUN</span>
+        <span class="font-heading font-bold text-white text-xs tracking-[0.25em] uppercase">MIDNIGHT SUN</span>
       </div>
       <button id="mobileMenuClose" class="p-2 text-white/50 hover:text-white" aria-label="Close menu">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
@@ -125,17 +134,17 @@
       </button>
     </div>
     <nav class="flex flex-col gap-4 py-6">
-      <a href="#home" class="mobile-nav-link text-white/60 hover:text-white text-sm uppercase tracking-[0.3em]">Home</a>
-      <a href="#intro" class="mobile-nav-link text-white/60 hover:text-white text-sm uppercase tracking-[0.3em]">Manifesto</a>
-      <a href="#about" class="mobile-nav-link text-white/60 hover:text-white text-sm uppercase tracking-[0.3em]">About Me</a>
-      <a href="#services" class="mobile-nav-link text-white/60 hover:text-white text-sm uppercase tracking-[0.3em]">Services</a>
-      <a href="#process" class="mobile-nav-link text-white/60 hover:text-white text-sm uppercase tracking-[0.3em]">Process</a>
-      <a href="#works" class="mobile-nav-link text-white/60 hover:text-white text-sm uppercase tracking-[0.3em]">My Works</a>
-      <a href="#colorlab" class="mobile-nav-link text-white/60 hover:text-white text-sm uppercase tracking-[0.3em]">Color Lab</a>
-      <a href="#contact" class="mobile-nav-link text-white/60 hover:text-white text-sm uppercase tracking-[0.3em]">Contact</a>
+      <a href="#home" class="mobile-nav-link text-white/60 hover:text-amber-400 text-sm uppercase tracking-[0.25em]">Home</a>
+      <a href="#intro" class="mobile-nav-link text-white/60 hover:text-amber-400 text-sm uppercase tracking-[0.25em]">Manifesto</a>
+      <a href="#about" class="mobile-nav-link text-white/60 hover:text-amber-400 text-sm uppercase tracking-[0.25em]">About Me</a>
+      <a href="#services" class="mobile-nav-link text-white/60 hover:text-amber-400 text-sm uppercase tracking-[0.25em]">Services</a>
+      <a href="#process" class="mobile-nav-link text-white/60 hover:text-amber-400 text-sm uppercase tracking-[0.25em]">Process</a>
+      <a href="#works" class="mobile-nav-link text-white/60 hover:text-amber-400 text-sm uppercase tracking-[0.25em]">My Works</a>
+      <a href="#colorlab" class="mobile-nav-link text-white/60 hover:text-amber-400 text-sm uppercase tracking-[0.25em]">Color Lab</a>
+      <a href="#contact" class="mobile-nav-link text-white/60 hover:text-amber-400 text-sm uppercase tracking-[0.25em]">Contact</a>
     </nav>
     <div class="mt-auto pt-6 border-t border-white/10 space-y-4">
-      <a href="#contact" class="btn-primary w-full text-center text-[10px] py-3 tracking-[0.3em]">
+      <a href="#contact" class="btn-primary w-full text-center text-[10px] py-3 tracking-[0.25em]">
         Enter The World
       </a>
       <p class="text-[10px] text-white/30 text-center font-mono tracking-widest">contact@midnightsunstudios.com</p>
@@ -143,78 +152,57 @@
   </aside>
 
   <!-- ======================================================================== -->
-  <!-- 2. HERO SECTION (ALIENADDA MONOLITHIC MINIMALISM) -->
+  <!-- 2. FULL FRAME CINEMATIC HERO (USER'S EXACT FEEDBACK) -->
+  <!-- Logo comes full frame first with clean, bold, monolithic name -->
   <!-- ======================================================================== -->
-  <section id="home" class="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-black px-4 pt-20">
+  <section id="home" class="hero-fullframe">
     
-    <!-- Central Ethereal Glow Orb -->
-    <div class="pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/5 blur-[130px]"></div>
+    <!-- Full Frame Logo Background Artwork with Celestial Horizon & Water Reflection -->
+    <img 
+      src="assets/images/logo.jpeg" 
+      alt="Midnight Sun Studios Official Full Frame Artwork" 
+      class="hero-fullframe-bg"
+    />
 
-    <div class="z-10 text-center max-w-5xl mx-auto space-y-6">
+    <!-- Cinematic Vignette & Deep Navy Gradient Overlay -->
+    <div class="hero-vignette"></div>
+
+    <!-- Center Content (Like Alienadda: Full Clean Name First, Uncluttered) -->
+    <div class="relative z-10 text-center max-w-5xl mx-auto px-4 space-y-5 pt-16">
       
-      <!-- Official Cinematic Logo Artwork / Emblem -->
-      <div class="relative mx-auto w-32 sm:w-40 aspect-square rounded-2xl overflow-hidden border border-amber-400/40 shadow-2xl shadow-amber-500/25 group mb-2">
-        <img 
-          src="assets/images/logo-emblem.jpeg" 
-          alt="Midnight Sun Studios Official Logo" 
-          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-        />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
-      </div>
-
-      <!-- Subtitle Pre-heading -->
-      <p class="text-xs font-light uppercase tracking-[0.6em] text-white/50 md:text-sm">
+      <!-- Subtitle Pre-heading with Golden Glow -->
+      <p class="text-xs sm:text-sm font-semibold uppercase tracking-[0.45em] text-amber-300 drop-shadow-md">
         Direction &bull; Cinematography &bull; Editing &bull; Color Science
       </p>
 
-      <!-- Monolithic Main Title -->
-      <h1 class="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold tracking-[0.18em] text-white font-heading leading-none uppercase">
+      <!-- Monolithic Main Title in Clean Modern Sans -->
+      <h1 class="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-[0.2em] text-white font-heading leading-tight uppercase drop-shadow-2xl">
         MIDNIGHT SUN
       </h1>
 
-      <!-- Cinematic Tagline -->
-      <p class="text-sm sm:text-base md:text-lg font-light tracking-[0.25em] text-white/70 max-w-2xl mx-auto uppercase">
+      <!-- Studio Tagline -->
+      <p class="text-sm sm:text-base md:text-lg font-light tracking-[0.3em] text-white/90 max-w-2xl mx-auto uppercase">
         A Journey From A Blank Slate To Visually Arresting Cinema.
       </p>
 
-      <!-- Action Buttons -->
+      <!-- Clean Action Buttons with Golden Accent -->
       <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
-        <a href="#contact" class="btn-primary py-3 px-8 text-xs tracking-[0.3em]">
+        <a href="#contact" class="btn-primary py-3 px-8 text-xs tracking-[0.25em]">
           Hire Me Now
         </a>
-        <a href="#works" class="btn-secondary py-3 px-8 text-xs tracking-[0.3em]">
+        <a href="#works" class="btn-secondary py-3 px-8 text-xs tracking-[0.25em]">
           Explore Works
         </a>
-        <button id="btnOpenShowreel" class="btn-secondary py-3 px-6 text-xs tracking-[0.3em] flex items-center gap-2">
-          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          <span>Showreel</span>
+        <button id="btnOpenShowreel" class="btn-secondary py-3 px-6 text-xs tracking-[0.25em] flex items-center gap-2 group">
+          <svg class="w-3.5 h-3.5 fill-current text-amber-400 group-hover:scale-110 transition-transform" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <span>Watch Reel</span>
         </button>
-      </div>
-
-      <!-- Quick Metrics Bar -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-12 max-w-3xl mx-auto border-t border-white/10 text-center">
-        <div>
-          <div class="counter-number text-2xl md:text-3xl font-heading font-light tracking-wider text-white" data-target="48" data-suffix="+">48+</div>
-          <div class="text-[9px] uppercase tracking-[0.4em] text-white/40 mt-1">Completed Works</div>
-        </div>
-        <div>
-          <div class="counter-number text-2xl md:text-3xl font-heading font-light tracking-wider text-white" data-target="240" data-suffix="m">240m</div>
-          <div class="text-[9px] uppercase tracking-[0.4em] text-white/40 mt-1">Graded Minutes</div>
-        </div>
-        <div>
-          <div class="counter-number text-2xl md:text-3xl font-heading font-light tracking-wider text-white" data-target="14" data-suffix="">14</div>
-          <div class="text-[9px] uppercase tracking-[0.4em] text-white/40 mt-1">Festival Laurels</div>
-        </div>
-        <div>
-          <div class="counter-number text-2xl md:text-3xl font-heading font-light tracking-wider text-white" data-target="100" data-suffix="%">100%</div>
-          <div class="text-[9px] uppercase tracking-[0.4em] text-white/40 mt-1">Visual Fidelity</div>
-        </div>
       </div>
 
     </div>
 
-    <!-- Alienadda Bouncing Scroll Indicator Line -->
-    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-40">
+    <!-- Alienadda Bouncing Scroll Line -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce opacity-40 z-10">
       <div class="h-12 w-[1px] bg-white"></div>
     </div>
   </section>
@@ -222,10 +210,10 @@
   <!-- ======================================================================== -->
   <!-- 3. INTRO MANIFESTO SCENE (ALIENADDA INTRO.TSX ADAPTED) -->
   <!-- ======================================================================== -->
-  <section id="intro" class="relative flex min-h-[75vh] w-full items-center justify-center overflow-hidden bg-black px-8 py-20">
-    <div class="pointer-events-none absolute inset-0 opacity-15 blur-3xl">
-      <div class="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-white/5"></div>
-      <div class="absolute bottom-1/4 right-1/4 h-[500px] w-[500px] rounded-full bg-white/5"></div>
+  <section id="intro" class="relative flex min-h-[70vh] w-full items-center justify-center overflow-hidden bg-[#020409] px-8 py-24 border-t border-white/5">
+    <div class="pointer-events-none absolute inset-0 opacity-20 blur-3xl">
+      <div class="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-[#0a1838]"></div>
+      <div class="absolute bottom-1/4 right-1/4 h-[500px] w-[500px] rounded-full bg-[#122452]"></div>
     </div>
 
     <div id="introStatementText" class="z-10 max-w-4xl text-center text-xl sm:text-3xl md:text-4xl font-light leading-relaxed tracking-wider text-white/90">
@@ -235,9 +223,9 @@
       <span class="intro-word inline-block mr-[0.3em] transition-all duration-700 opacity-60">of</span>
       <span class="intro-word inline-block mr-[0.3em] transition-all duration-700 opacity-60">imagination</span>
       <span class="intro-word inline-block mr-[0.3em] transition-all duration-700 opacity-60">into</span>
-      <span class="intro-word inline-block mr-[0.3em] transition-all duration-700 opacity-60 text-white font-medium">visceral</span>
-      <span class="intro-word inline-block mr-[0.3em] transition-all duration-700 opacity-60 text-white font-medium">cinematic</span>
-      <span class="intro-word inline-block mr-[0.3em] transition-all duration-700 opacity-60 text-white font-medium">worlds.</span>
+      <span class="intro-word inline-block mr-[0.3em] transition-all duration-700 opacity-60 text-amber-300 font-medium">visceral</span>
+      <span class="intro-word inline-block mr-[0.3em] transition-all duration-700 opacity-60 text-amber-300 font-medium">cinematic</span>
+      <span class="intro-word inline-block mr-[0.3em] transition-all duration-700 opacity-60 text-amber-300 font-medium">worlds.</span>
       <br class="hidden sm:inline" />
       <span class="intro-word inline-block mr-[0.3em] transition-all duration-700 opacity-60">Every</span>
       <span class="intro-word inline-block mr-[0.3em] transition-all duration-700 opacity-60">frame</span>
@@ -253,57 +241,57 @@
   </section>
 
   <!-- ======================================================================== -->
-  <!-- 4. ABOUT SECTION (ALIENADDA MONOCHROME PORTRAIT + RAAJ DHOUNDIYAL STORY) -->
+  <!-- 4. ABOUT SECTION (HIMALAYAN ROOTS, TRAINING & HERITAGE) -->
   <!-- ======================================================================== -->
-  <section id="about" class="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-black px-6 sm:px-12 py-24 border-t border-white/5">
+  <section id="about" class="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-[#030611] px-6 sm:px-12 py-24 border-t border-white/5">
     <div class="grid w-full max-w-6xl grid-cols-1 items-center gap-14 md:grid-cols-2">
       
-      <!-- Grayscale Cinematic Portrait -->
-      <div class="relative aspect-[3/4] w-full overflow-hidden grayscale rounded-xl border border-white/10 group">
+      <!-- Grayscale Cinematic Portrait with Golden Horizon Rim -->
+      <div class="relative aspect-[3/4] w-full overflow-hidden grayscale rounded-2xl border border-white/10 group shadow-2xl">
         <img 
           src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop" 
           alt="Director & Filmmaker" 
           class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
         />
-        <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-[#030611] via-transparent to-transparent"></div>
         <div class="absolute bottom-6 left-6 right-6">
-          <div class="text-[9px] uppercase font-mono tracking-[0.4em] text-white/50">Himalayan Roots • Global Screen</div>
-          <div class="text-sm font-light tracking-[0.2em] text-white uppercase mt-1">Independent Filmmaker & Colorist</div>
+          <div class="text-[9px] uppercase font-mono tracking-[0.4em] text-amber-400">Himalayan Roots &bull; Global Cinema</div>
+          <div class="text-sm font-semibold tracking-[0.2em] text-white uppercase mt-1">Independent Filmmaker & Colorist</div>
         </div>
       </div>
 
       <!-- Narrative & Background -->
       <div class="z-10 space-y-6">
-        <h2 class="text-xs uppercase tracking-[0.8em] text-white/40">
+        <h2 class="text-xs uppercase tracking-[0.8em] text-amber-400/70 font-mono">
           Founder & Director
         </h2>
         
-        <h3 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white font-heading">
+        <h3 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-white font-heading">
           Midnight Sun Studios
         </h3>
 
-        <p class="text-base sm:text-lg font-light leading-relaxed tracking-wide text-white/70">
-          Born from a deep conviction that filmmaking should be unvarnished, socially rooted, and visually extraordinary. Combining rigorous technical training from premier institutes—including <strong class="text-white">MAAC</strong>, <strong class="text-white">Maharaja Agrasen College</strong>, <strong class="text-white">SIFT (Mumbai)</strong>, and <strong class="text-white">ZIMA (Mumbai)</strong>—we bridge scriptwriting and camera operation with master-level DaVinci Resolve color science.
+        <p class="text-base sm:text-lg font-light leading-relaxed tracking-wide text-white/75">
+          Born from a deep conviction that filmmaking should be unvarnished, socially rooted, and visually extraordinary. Combining specialized training from premier institutes—including <strong class="text-amber-300">MAAC</strong>, <strong class="text-amber-300">Maharaja Agrasen College</strong>, <strong class="text-amber-300">SIFT (Mumbai)</strong>, and <strong class="text-amber-300">ZIMA (Mumbai)</strong>—we unite screenwriting and camera operation with master-level DaVinci Resolve color science.
         </p>
 
-        <p class="text-sm font-light leading-relaxed tracking-wide text-white/50">
+        <p class="text-sm font-light leading-relaxed tracking-wide text-white/60">
           Since founding our independent production house in 2019, our projects have garnered major festival recognition, including <em class="text-white">Parwaaz Ek Udaan</em> (IFP 50-Hour Challenge Trailer Winner), <em class="text-white">Glaani</em> (Pune Short Film Festival Selection), and the hit music video <em class="text-white">Mera Pahad Mera Himala</em> on Zee Music (8M+ views).
         </p>
 
-        <!-- Stats Grid (Alienadda Layout) -->
+        <!-- Stats Grid with Golden Accents -->
         <div class="mt-8 grid grid-cols-2 gap-8 pt-6 border-t border-white/10">
           <div>
-            <div class="text-[9px] uppercase tracking-[0.5em] text-white/30">Experience</div>
-            <div class="text-white/80 tracking-widest text-sm font-mono mt-1">10+ Years</div>
+            <div class="text-[9px] uppercase tracking-[0.5em] text-white/40 font-mono">Experience</div>
+            <div class="text-amber-400 tracking-widest text-lg font-bold font-mono mt-1">10+ Years</div>
           </div>
           <div>
-            <div class="text-[9px] uppercase tracking-[0.5em] text-white/30">Core Specialization</div>
-            <div class="text-white/80 tracking-widest text-sm font-mono mt-1">Direction & Color Science</div>
+            <div class="text-[9px] uppercase tracking-[0.5em] text-white/40 font-mono">Core Specialization</div>
+            <div class="text-white tracking-widest text-sm font-semibold mt-1">Direction & Color Science</div>
           </div>
         </div>
 
         <div class="pt-2">
-          <a href="#contact" class="btn-primary text-[10px] py-2.5 px-6 tracking-[0.3em]">
+          <a href="#contact" class="btn-primary text-[10px] py-2.5 px-6 tracking-[0.25em]">
             Hire Me Now
           </a>
         </div>
@@ -315,17 +303,17 @@
   <!-- ======================================================================== -->
   <!-- 5. SERVICES SECTION (RAAJ DHOUNDIYAL'S 6 CORE PILLARS) -->
   <!-- ======================================================================== -->
-  <section id="services" class="py-24 relative z-10 px-6 sm:px-12 bg-black border-t border-white/5">
+  <section id="services" class="py-24 relative z-10 px-6 sm:px-12 bg-[#020409] border-t border-white/5">
     <div class="max-w-7xl mx-auto space-y-16">
       
       <div class="text-center max-w-3xl mx-auto space-y-3">
-        <h2 class="text-xs uppercase tracking-[0.8em] text-white/40">
+        <h2 class="text-xs uppercase tracking-[0.8em] text-amber-400/80 font-mono">
           Capabilities
         </h2>
-        <h3 class="text-3xl sm:text-5xl font-heading font-extrabold text-white tracking-tight uppercase">
+        <h3 class="text-3xl sm:text-5xl font-heading font-black text-white tracking-tight uppercase">
           Services Offered
         </h3>
-        <p class="text-white/50 text-sm tracking-wider font-light">
+        <p class="text-white/60 text-sm tracking-wider font-light">
           Comprehensive creative and technical services for narrative cinema, commercials, and music videos.
         </p>
       </div>
@@ -335,11 +323,11 @@
         <!-- Writing -->
         <div class="glass-card p-8 space-y-4 flex flex-col justify-between group">
           <div class="space-y-3">
-            <span class="text-xs font-mono tracking-widest text-white/30">01 // CONCEPT</span>
-            <h4 class="text-xl font-heading font-bold text-white tracking-wider uppercase group-hover:text-white transition-colors">
+            <span class="text-xs font-mono tracking-widest text-amber-400/70">01 // CONCEPT</span>
+            <h4 class="text-xl font-heading font-bold text-white tracking-wider uppercase group-hover:text-amber-300 transition-colors">
               Writing & Screenplay
             </h4>
-            <p class="text-xs text-white/60 leading-relaxed font-light">
+            <p class="text-xs text-white/65 leading-relaxed font-light">
               Transforming raw prompts into shootable screenplays with poignant dialogues, emotional arcs, and cinematic treatments.
             </p>
           </div>
@@ -351,11 +339,11 @@
         <!-- Direction -->
         <div class="glass-card p-8 space-y-4 flex flex-col justify-between group">
           <div class="space-y-3">
-            <span class="text-xs font-mono tracking-widest text-white/30">02 // VISION</span>
-            <h4 class="text-xl font-heading font-bold text-white tracking-wider uppercase group-hover:text-white transition-colors">
+            <span class="text-xs font-mono tracking-widest text-amber-400/70">02 // VISION</span>
+            <h4 class="text-xl font-heading font-bold text-white tracking-wider uppercase group-hover:text-amber-300 transition-colors">
               Direction
             </h4>
-            <p class="text-xs text-white/60 leading-relaxed font-light">
+            <p class="text-xs text-white/65 leading-relaxed font-light">
               Guiding vision, scene staging, actor coaching, and visual execution for short films, music videos, documentaries, and commercials.
             </p>
           </div>
@@ -367,11 +355,11 @@
         <!-- Cinematography / Camera -->
         <div class="glass-card p-8 space-y-4 flex flex-col justify-between group">
           <div class="space-y-3">
-            <span class="text-xs font-mono tracking-widest text-white/30">03 // OPTICS</span>
-            <h4 class="text-xl font-heading font-bold text-white tracking-wider uppercase group-hover:text-white transition-colors">
+            <span class="text-xs font-mono tracking-widest text-amber-400/70">03 // OPTICS</span>
+            <h4 class="text-xl font-heading font-bold text-white tracking-wider uppercase group-hover:text-amber-300 transition-colors">
               Cinematography
             </h4>
-            <p class="text-xs text-white/60 leading-relaxed font-light">
+            <p class="text-xs text-white/65 leading-relaxed font-light">
               Large-format ARRI and RED digital capture, anamorphic lens craft, painterly lighting design, drone aerials, and fluid movement.
             </p>
           </div>
@@ -383,11 +371,11 @@
         <!-- Video Editing -->
         <div class="glass-card p-8 space-y-4 flex flex-col justify-between group">
           <div class="space-y-3">
-            <span class="text-xs font-mono tracking-widest text-white/30">04 // MONTAGE</span>
-            <h4 class="text-xl font-heading font-bold text-white tracking-wider uppercase group-hover:text-white transition-colors">
+            <span class="text-xs font-mono tracking-widest text-amber-400/70">04 // MONTAGE</span>
+            <h4 class="text-xl font-heading font-bold text-white tracking-wider uppercase group-hover:text-amber-300 transition-colors">
               Video Editing
             </h4>
-            <p class="text-xs text-white/60 leading-relaxed font-light">
+            <p class="text-xs text-white/65 leading-relaxed font-light">
               Narrative assembly, rhythmic montage, match cuts, pacing control, and multi-camera post-production conform workflows.
             </p>
           </div>
@@ -397,29 +385,29 @@
         </div>
 
         <!-- Color Grading -->
-        <div class="glass-card p-8 space-y-4 flex flex-col justify-between group border-white/30">
+        <div class="glass-card p-8 space-y-4 flex flex-col justify-between group border-amber-400/40">
           <div class="space-y-3">
-            <span class="text-xs font-mono tracking-widest text-white">05 // COLOR SCIENCE</span>
-            <h4 class="text-xl font-heading font-bold text-white tracking-wider uppercase group-hover:text-white transition-colors">
+            <span class="text-xs font-mono tracking-widest text-amber-400">05 // COLOR SCIENCE</span>
+            <h4 class="text-xl font-heading font-bold text-white tracking-wider uppercase group-hover:text-amber-300 transition-colors">
               Master Color Grading
             </h4>
-            <p class="text-xs text-white/60 leading-relaxed font-light">
+            <p class="text-xs text-white/65 leading-relaxed font-light">
               DaVinci Resolve Studio color science, ACEScc color management, custom film stock print emulation (Kodak 2383/Fuji), and HDR mastering.
             </p>
           </div>
           <div class="pt-4 border-t border-white/5">
-            <span class="text-[10px] font-mono tracking-widest text-white uppercase">ACES 1.3 &bull; Dolby Vision &bull; DCI-P3</span>
+            <span class="text-[10px] font-mono tracking-widest text-amber-300 uppercase">ACES 1.3 &bull; Dolby Vision &bull; DCI-P3</span>
           </div>
         </div>
 
         <!-- Production Design -->
         <div class="glass-card p-8 space-y-4 flex flex-col justify-between group">
           <div class="space-y-3">
-            <span class="text-xs font-mono tracking-widest text-white/30">06 // WORLD BUILDING</span>
-            <h4 class="text-xl font-heading font-bold text-white tracking-wider uppercase group-hover:text-white transition-colors">
+            <span class="text-xs font-mono tracking-widest text-amber-400/70">06 // WORLD BUILDING</span>
+            <h4 class="text-xl font-heading font-bold text-white tracking-wider uppercase group-hover:text-amber-300 transition-colors">
               Production Design
             </h4>
-            <p class="text-xs text-white/60 leading-relaxed font-light">
+            <p class="text-xs text-white/65 leading-relaxed font-light">
               Visual world-building, location styling, moodboard creation, authentic props, and aesthetic cohesion for period and contemporary films.
             </p>
           </div>
@@ -436,10 +424,10 @@
   <!-- ======================================================================== -->
   <!-- 6. THE SCULPTING PROCESS (ALIENADDA FLOATING SPATIAL SCENE) -->
   <!-- ======================================================================== -->
-  <section id="process" class="relative min-h-screen w-full overflow-hidden bg-black px-6 sm:px-12 py-24 border-t border-white/5">
+  <section id="process" class="relative min-h-screen w-full overflow-hidden bg-[#030611] px-6 sm:px-12 py-24 border-t border-white/5">
     
     <div class="text-center max-w-xl mx-auto mb-16 space-y-2">
-      <h2 class="text-xs uppercase tracking-[0.8em] text-white/40">
+      <h2 class="text-xs uppercase tracking-[0.8em] text-amber-400/80 font-mono">
         The Sculpting Process
       </h2>
       <p class="text-xs text-white/50 tracking-widest uppercase font-light">
@@ -451,55 +439,55 @@
     <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-8 py-10 relative">
       
       <!-- Node 1 -->
-      <div class="process-item group p-6 rounded-xl border border-white/5 hover:border-white/20 bg-white/[0.01] transition-all">
+      <div class="process-item group p-6 rounded-xl border border-white/10 hover:border-amber-400/40 bg-white/[0.02] transition-all">
         <div class="process-line mb-3"></div>
         <span class="process-label block font-mono">01 // SKETCH & TREATMENT</span>
-        <p class="mt-3 text-xs text-white/50 font-light leading-relaxed tracking-wider">
+        <p class="mt-3 text-xs text-white/55 font-light leading-relaxed tracking-wider">
           Extracting emotional cores from blank pages into shootable treatments.
         </p>
       </div>
 
       <!-- Node 2 -->
-      <div class="process-item group p-6 rounded-xl border border-white/5 hover:border-white/20 bg-white/[0.01] transition-all">
+      <div class="process-item group p-6 rounded-xl border border-white/10 hover:border-amber-400/40 bg-white/[0.02] transition-all">
         <div class="process-line mb-3"></div>
         <span class="process-label block font-mono">02 // MOODBOARD & DNA</span>
-        <p class="mt-3 text-xs text-white/50 font-light leading-relaxed tracking-wider">
+        <p class="mt-3 text-xs text-white/55 font-light leading-relaxed tracking-wider">
           Curating optical textures, tonal palettes, and visual architecture.
         </p>
       </div>
 
       <!-- Node 3 -->
-      <div class="process-item group p-6 rounded-xl border border-white/5 hover:border-white/20 bg-white/[0.01] transition-all">
+      <div class="process-item group p-6 rounded-xl border border-white/10 hover:border-amber-400/40 bg-white/[0.02] transition-all">
         <div class="process-line mb-3"></div>
         <span class="process-label block font-mono">03 // LIGHTING & OPTICS</span>
-        <p class="mt-3 text-xs text-white/50 font-light leading-relaxed tracking-wider">
+        <p class="mt-3 text-xs text-white/55 font-light leading-relaxed tracking-wider">
           Sculpting high-contrast chiaroscuro with anamorphic glass flares.
         </p>
       </div>
 
       <!-- Node 4 -->
-      <div class="process-item group p-6 rounded-xl border border-white/5 hover:border-white/20 bg-white/[0.01] transition-all">
+      <div class="process-item group p-6 rounded-xl border border-white/10 hover:border-amber-400/40 bg-white/[0.02] transition-all">
         <div class="process-line mb-3"></div>
         <span class="process-label block font-mono">04 // ANAMORPHIC CAPTURE</span>
-        <p class="mt-3 text-xs text-white/50 font-light leading-relaxed tracking-wider">
+        <p class="mt-3 text-xs text-white/55 font-light leading-relaxed tracking-wider">
           Large-format sensor execution in 2.39:1 CinemaScope widescreen.
         </p>
       </div>
 
       <!-- Node 5 -->
-      <div class="process-item group p-6 rounded-xl border border-white/5 hover:border-white/20 bg-white/[0.01] transition-all">
+      <div class="process-item group p-6 rounded-xl border border-white/10 hover:border-amber-400/40 bg-white/[0.02] transition-all">
         <div class="process-line mb-3"></div>
         <span class="process-label block font-mono">05 // EDITORIAL MONTAGE</span>
-        <p class="mt-3 text-xs text-white/50 font-light leading-relaxed tracking-wider">
+        <p class="mt-3 text-xs text-white/55 font-light leading-relaxed tracking-wider">
           Rhythmic cuts and acoustic pacing that keep audiences suspended.
         </p>
       </div>
 
       <!-- Node 6 -->
-      <div class="process-item group p-6 rounded-xl border border-white/5 hover:border-white/20 bg-white/[0.01] transition-all">
+      <div class="process-item group p-6 rounded-xl border border-white/10 hover:border-amber-400/40 bg-white/[0.02] transition-all">
         <div class="process-line mb-3"></div>
         <span class="process-label block font-mono">06 // ACES COLOR SCIENCE</span>
-        <p class="mt-3 text-xs text-white/50 font-light leading-relaxed tracking-wider">
+        <p class="mt-3 text-xs text-white/55 font-light leading-relaxed tracking-wider">
           Precision DaVinci grading and Kodak 2383 film stock emulation.
         </p>
       </div>
@@ -511,19 +499,19 @@
   <!-- ======================================================================== -->
   <!-- 7. "MY WORKS" PORTFOLIO (RAAJ DHOUNDIYAL WIREFRAME + ALIENADDA GRAYSCALE) -->
   <!-- ======================================================================== -->
-  <section id="works" class="py-24 relative z-10 px-6 sm:px-12 bg-black border-t border-white/5">
+  <section id="works" class="py-24 relative z-10 px-6 sm:px-12 bg-[#020409] border-t border-white/5">
     <div class="max-w-7xl mx-auto space-y-12">
       
       <!-- Section Header & Filter Pills -->
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div class="space-y-2">
-          <h2 class="text-xs uppercase tracking-[0.8em] text-white/40">
+          <h2 class="text-xs uppercase tracking-[0.8em] text-amber-400/80 font-mono">
             Selected Works
           </h2>
-          <h3 class="text-3xl sm:text-5xl font-heading font-extrabold text-white tracking-tight uppercase">
+          <h3 class="text-3xl sm:text-5xl font-heading font-black text-white tracking-tight uppercase">
             My Works
           </h3>
-          <p class="text-white/50 text-xs sm:text-sm font-light tracking-wider max-w-xl">
+          <p class="text-white/60 text-xs sm:text-sm font-light tracking-wider max-w-xl">
             Hover to view full color & dynamic stills. Click any card to view detailed blueprints and festival laurels.
           </p>
         </div>
@@ -551,17 +539,17 @@
   <!-- ======================================================================== -->
   <!-- 8. THE COLOR GRADING LAB (INTERACTIVE RAW vs GRADED) -->
   <!-- ======================================================================== -->
-  <section id="colorlab" class="py-24 relative z-10 px-6 sm:px-12 bg-black border-t border-white/5">
+  <section id="colorlab" class="py-24 relative z-10 px-6 sm:px-12 bg-[#030611] border-t border-white/5">
     <div class="max-w-7xl mx-auto space-y-12">
       
       <div class="text-center max-w-3xl mx-auto space-y-3">
-        <h2 class="text-xs uppercase tracking-[0.8em] text-white/40">
+        <h2 class="text-xs uppercase tracking-[0.8em] text-amber-400/80 font-mono">
           Precision Grading
         </h2>
-        <h3 class="text-3xl sm:text-5xl font-heading font-extrabold text-white tracking-tight uppercase">
+        <h3 class="text-3xl sm:text-5xl font-heading font-black text-white tracking-tight uppercase">
           The Color Lab
         </h3>
-        <p class="text-white/50 text-xs sm:text-sm font-light tracking-wider">
+        <p class="text-white/60 text-xs sm:text-sm font-light tracking-wider">
           Drag the interactive split handle to compare raw camera sensor data with the final Midnight Sun grade.
         </p>
       </div>
@@ -594,13 +582,13 @@
         </div>
 
         <div id="comparisonHandle" class="comparison-slider-handle">
-          <svg class="w-4 h-4 text-black" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <svg class="w-4 h-4 text-[#020409]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
             <path d="M8 9l-3 3 3 3m8-6l3 3-3 3"/>
           </svg>
         </div>
       </div>
 
-      <div id="colorSceneSpecs" class="text-center text-xs font-mono text-white/40 max-w-2xl mx-auto p-3 rounded-lg bg-white/[0.02] border border-white/5">
+      <div id="colorSceneSpecs" class="text-center text-xs font-mono text-white/50 max-w-2xl mx-auto p-3 rounded-lg bg-white/[0.02] border border-white/5">
         <!-- Loaded via color-slider.js -->
       </div>
 
@@ -610,18 +598,18 @@
   <!-- ======================================================================== -->
   <!-- 9. CONTACT SCENE (ALIENADDA "ENTER THE WORLD" + RAAJ INQUIRY FORM) -->
   <!-- ======================================================================== -->
-  <section id="contact" class="relative min-h-[90vh] w-full flex flex-col items-center justify-center bg-black px-6 sm:px-12 py-24 border-t border-white/5">
+  <section id="contact" class="relative min-h-[90vh] w-full flex flex-col items-center justify-center bg-[#020409] px-6 sm:px-12 py-24 border-t border-white/5">
     
     <div class="w-full max-w-4xl mx-auto space-y-12">
       
       <!-- Top Callout (Alienadda Style) -->
       <div class="text-center space-y-4">
-        <h2 class="text-xs uppercase tracking-[1.2em] text-white/40">
+        <h2 class="text-xs uppercase tracking-[1.2em] text-amber-400/80 font-mono">
           Ready to begin?
         </h2>
         <a 
           href="mailto:contact@midnightsunstudios.com" 
-          class="block text-4xl sm:text-6xl md:text-7xl font-light tracking-[0.18em] text-white hover:text-white/70 transition-colors uppercase font-heading"
+          class="block text-4xl sm:text-6xl md:text-7xl font-black tracking-[0.18em] text-white hover:text-amber-300 transition-colors uppercase font-heading"
         >
           ENTER THE WORLD
         </a>
@@ -635,18 +623,18 @@
         <form id="inquiryForm" class="space-y-6">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div class="space-y-2">
-              <label for="senderName" class="text-[10px] font-mono uppercase tracking-widest text-white/40">Your Name *</label>
+              <label for="senderName" class="text-[10px] font-mono uppercase tracking-widest text-white/50">Your Name *</label>
               <input type="text" id="senderName" required placeholder="Vikram Sharma" class="form-input" />
             </div>
             <div class="space-y-2">
-              <label for="senderEmail" class="text-[10px] font-mono uppercase tracking-widest text-white/40">Email Address *</label>
+              <label for="senderEmail" class="text-[10px] font-mono uppercase tracking-widest text-white/50">Email Address *</label>
               <input type="email" id="senderEmail" required placeholder="vikram@domain.com" class="form-input" />
             </div>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div class="space-y-2">
-              <label for="projectType" class="text-[10px] font-mono uppercase tracking-widest text-white/40">Discipline</label>
+              <label for="projectType" class="text-[10px] font-mono uppercase tracking-widest text-white/50">Discipline</label>
               <select id="projectType" class="form-select">
                 <option value="direction">Direction</option>
                 <option value="cinematography">Cinematography / Camera</option>
@@ -657,7 +645,7 @@
               </select>
             </div>
             <div class="space-y-2">
-              <label for="projectBudget" class="text-[10px] font-mono uppercase tracking-widest text-white/40">Budget Range</label>
+              <label for="projectBudget" class="text-[10px] font-mono uppercase tracking-widest text-white/50">Budget Range</label>
               <select id="projectBudget" class="form-select">
                 <option value="indie">$5,000 – $15,000</option>
                 <option value="commercial">$15,000 – $50,000</option>
@@ -668,12 +656,12 @@
           </div>
 
           <div class="space-y-2">
-            <label for="senderMessage" class="text-[10px] font-mono uppercase tracking-widest text-white/40">Message & Concept Brief *</label>
+            <label for="senderMessage" class="text-[10px] font-mono uppercase tracking-widest text-white/50">Message & Concept Brief *</label>
             <textarea id="senderMessage" rows="4" required placeholder="Share your story vision, references, shoot window, or script treatment..." class="form-textarea"></textarea>
           </div>
 
-          <button type="submit" class="btn-primary w-full py-4 text-xs font-bold uppercase tracking-[0.3em]">
-            <span>Enter The World</span>
+          <button type="submit" class="btn-primary w-full py-4 text-xs font-bold uppercase tracking-[0.25em]">
+            <span>Send Production Inquiry</span>
             <svg class="w-3.5 h-3.5 ml-2 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>
@@ -682,18 +670,18 @@
         </form>
       </div>
 
-      <!-- Social Channels (Alienadda Style) -->
+      <!-- Social Channels -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center pt-8">
-        <a href="https://instagram.com" target="_blank" rel="noopener" class="text-[10px] uppercase tracking-[0.7em] text-white/40 hover:text-white transition-colors">
+        <a href="https://instagram.com" target="_blank" rel="noopener" class="text-[10px] uppercase tracking-[0.7em] text-white/40 hover:text-amber-300 transition-colors">
           Instagram
         </a>
-        <a href="https://behance.net" target="_blank" rel="noopener" class="text-[10px] uppercase tracking-[0.7em] text-white/40 hover:text-white transition-colors">
+        <a href="https://behance.net" target="_blank" rel="noopener" class="text-[10px] uppercase tracking-[0.7em] text-white/40 hover:text-amber-300 transition-colors">
           Behance
         </a>
-        <a href="https://vimeo.com" target="_blank" rel="noopener" class="text-[10px] uppercase tracking-[0.7em] text-white/40 hover:text-white transition-colors">
+        <a href="https://vimeo.com" target="_blank" rel="noopener" class="text-[10px] uppercase tracking-[0.7em] text-white/40 hover:text-amber-300 transition-colors">
           Vimeo
         </a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener" class="text-[10px] uppercase tracking-[0.7em] text-white/40 hover:text-white transition-colors">
+        <a href="https://linkedin.com" target="_blank" rel="noopener" class="text-[10px] uppercase tracking-[0.7em] text-white/40 hover:text-amber-300 transition-colors">
           LinkedIn
         </a>
       </div>
@@ -709,8 +697,8 @@
 
     </div>
 
-    <!-- Alienadda Copyright Notice -->
-    <div class="pt-8 text-[9px] uppercase tracking-[0.8em] text-white/20 text-center font-mono">
+    <!-- Copyright Notice -->
+    <div class="pt-8 text-[9px] uppercase tracking-[0.8em] text-white/30 text-center font-mono">
       &copy; 2026 MIDNIGHT SUN STUDIOS. ALL RIGHTS RESERVED.
     </div>
 
@@ -734,7 +722,7 @@
   </div>
 
   <div id="showreelModalOverlay" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Showreel Player">
-    <div class="modal-content max-w-5xl bg-black border border-white/20">
+    <div class="modal-content max-w-5xl bg-[#040814] border border-white/20">
       <button id="showreelModalClose" class="modal-close-btn" aria-label="Close showreel">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
           <line x1="18" y1="6" x2="6" y2="18"/>
@@ -746,8 +734,8 @@
           <div class="flex items-center gap-3">
             <img src="assets/images/logo-emblem.jpeg" alt="Midnight Sun Studios" class="w-8 h-8 rounded-full border border-amber-400/50 object-cover" />
             <div>
-              <span class="text-[10px] font-mono tracking-widest text-white/40">MIDNIGHT SUN STUDIOS</span>
-              <h3 class="text-xl font-heading font-bold text-white tracking-widest uppercase">Cinematic Showreel 2026</h3>
+              <span class="text-[10px] font-mono tracking-widest text-amber-300">MIDNIGHT SUN STUDIOS</span>
+              <h3 class="text-xl font-heading font-black text-white tracking-widest uppercase">Cinematic Showreel 2026</h3>
             </div>
           </div>
           <span class="text-[10px] font-mono text-white/50 tracking-widest">4K DCI &bull; 2.39:1</span>
@@ -756,7 +744,7 @@
           <video 
             id="showreelVideoPlayer" 
             class="w-full h-full object-cover" 
-            poster="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1200&auto=format&fit=crop" 
+            poster="assets/images/logo.jpeg" 
             controls 
             playsinline>
             <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" type="video/mp4">
@@ -769,7 +757,7 @@
 
   <!-- Toast -->
   <div id="feedbackToast" class="toast" role="status" aria-live="polite">
-    <div class="p-1 rounded-full bg-white/10 text-white">
+    <div class="p-1 rounded-full bg-amber-400/20 text-amber-400">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
     </div>
     <span id="toastMessage" class="text-xs font-mono tracking-wider"></span>
