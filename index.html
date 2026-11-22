@@ -7,7 +7,8 @@
   <meta name="description" content="Cinematic portfolio of Midnight Sun Studios. Direction, Cinematography, Editing, Master Color Grading, and Visual World Building." />
   
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'><circle cx='12' cy='12' r='6'/><path d='M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41'/></svg>" />
+  <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/images/favicon.png" />
 
   <!-- Google Fonts: Syne & Plus Jakarta Sans / Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -57,16 +58,20 @@
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       
       <!-- Brand Logo / Monogram -->
-      <a href="index.html" class="flex items-center gap-3 group">
-        <div class="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center bg-white/5 backdrop-blur-md group-hover:border-white transition-colors">
-          <div class="w-2.5 h-2.5 rounded-full bg-white group-hover:scale-125 transition-transform duration-500"></div>
+      <a href="index.html" class="flex items-center gap-3.5 group">
+        <div class="relative w-9 h-9 rounded-full overflow-hidden border border-amber-400/50 shadow-lg shadow-amber-500/20 group-hover:border-amber-300 group-hover:shadow-amber-500/40 transition-all duration-500">
+          <img 
+            src="assets/images/logo-emblem.jpeg" 
+            alt="Midnight Sun Studios Emblem" 
+            class="w-full h-full object-cover group-hover:scale-115 transition-transform duration-700" 
+          />
         </div>
         <div class="flex flex-col">
-          <span class="font-heading font-extrabold text-sm tracking-[0.3em] text-white uppercase group-hover:text-white transition-colors">
+          <span class="font-heading font-extrabold text-sm tracking-[0.3em] text-white uppercase group-hover:text-amber-200 transition-colors">
             MIDNIGHT SUN
           </span>
-          <span class="text-[8px] uppercase font-mono tracking-[0.4em] text-white/40 -mt-1">
-            CINEMA STUDIO
+          <span class="text-[8px] uppercase font-mono tracking-[0.45em] text-white/50 -mt-0.5">
+            STUDIOS &bull; CINEMA LAB
           </span>
         </div>
       </a>
@@ -106,7 +111,12 @@
   <div id="drawerBackdrop" class="drawer-backdrop" aria-hidden="true"></div>
   <aside id="mobileDrawer" class="mobile-drawer" aria-label="Mobile Navigation">
     <div class="flex items-center justify-between pb-6 border-b border-white/10">
-      <span class="font-heading font-bold text-white text-xs tracking-[0.3em] uppercase">MIDNIGHT SUN</span>
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full overflow-hidden border border-amber-400/40">
+          <img src="assets/images/logo-emblem.jpeg" alt="Midnight Sun Studios" class="w-full h-full object-cover" />
+        </div>
+        <span class="font-heading font-bold text-white text-xs tracking-[0.3em] uppercase">MIDNIGHT SUN</span>
+      </div>
       <button id="mobileMenuClose" class="p-2 text-white/50 hover:text-white" aria-label="Close menu">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
           <line x1="18" y1="6" x2="6" y2="18"/>
@@ -142,6 +152,16 @@
 
     <div class="z-10 text-center max-w-5xl mx-auto space-y-6">
       
+      <!-- Official Cinematic Logo Artwork / Emblem -->
+      <div class="relative mx-auto w-32 sm:w-40 aspect-square rounded-2xl overflow-hidden border border-amber-400/40 shadow-2xl shadow-amber-500/25 group mb-2">
+        <img 
+          src="assets/images/logo-emblem.jpeg" 
+          alt="Midnight Sun Studios Official Logo" 
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+      </div>
+
       <!-- Subtitle Pre-heading -->
       <p class="text-xs font-light uppercase tracking-[0.6em] text-white/50 md:text-sm">
         Direction &bull; Cinematography &bull; Editing &bull; Color Science
@@ -664,7 +684,6 @@
 
       <!-- Social Channels (Alienadda Style) -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center pt-8">
-        {["Instagram", "Behance", "Vimeo", "LinkedIn"]}
         <a href="https://instagram.com" target="_blank" rel="noopener" class="text-[10px] uppercase tracking-[0.7em] text-white/40 hover:text-white transition-colors">
           Instagram
         </a>
@@ -679,10 +698,19 @@
         </a>
       </div>
 
+      <!-- Full Logo Showcase in Footer -->
+      <div class="pt-16 pb-4 flex flex-col items-center justify-center">
+        <img 
+          src="assets/images/logo.jpeg" 
+          alt="Midnight Sun Studios" 
+          class="max-w-[280px] sm:max-w-[360px] w-full rounded-xl border border-white/10 opacity-70 hover:opacity-100 transition-opacity duration-700 shadow-2xl" 
+        />
+      </div>
+
     </div>
 
     <!-- Alienadda Copyright Notice -->
-    <div class="pt-20 text-[9px] uppercase tracking-[0.8em] text-white/20 text-center font-mono">
+    <div class="pt-8 text-[9px] uppercase tracking-[0.8em] text-white/20 text-center font-mono">
       &copy; 2026 MIDNIGHT SUN STUDIOS. ALL RIGHTS RESERVED.
     </div>
 
@@ -715,9 +743,12 @@
       </button>
       <div class="p-6 space-y-4">
         <div class="flex items-center justify-between">
-          <div>
-            <span class="text-[10px] font-mono tracking-widest text-white/40">MIDNIGHT SUN STUDIOS</span>
-            <h3 class="text-xl font-heading font-bold text-white tracking-widest uppercase">Cinematic Showreel 2026</h3>
+          <div class="flex items-center gap-3">
+            <img src="assets/images/logo-emblem.jpeg" alt="Midnight Sun Studios" class="w-8 h-8 rounded-full border border-amber-400/50 object-cover" />
+            <div>
+              <span class="text-[10px] font-mono tracking-widest text-white/40">MIDNIGHT SUN STUDIOS</span>
+              <h3 class="text-xl font-heading font-bold text-white tracking-widest uppercase">Cinematic Showreel 2026</h3>
+            </div>
           </div>
           <span class="text-[10px] font-mono text-white/50 tracking-widest">4K DCI &bull; 2.39:1</span>
         </div>
