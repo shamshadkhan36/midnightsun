@@ -51,7 +51,9 @@ function initLenisSmoothScroll() {
 }
 
 /* --------------------------------------------------------------------------
-   2. ALIENADDA SCROLL BLUR ANIMATIONS (GSAP SCROLLTRIGGER)
+   2. ALIENADDA SCROLL BLUR ANIMATIONS (GSAP SCROLLTRIGGER ENGINE)
+   Bidirectional Blur Scrubbing: Incoming text de-blurs from bottom into sharp focus,
+   and outgoing text blurs upward into the ether as the user scrolls past.
    -------------------------------------------------------------------------- */
 function initAlienaddaScrollBlurAnimations() {
   if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
@@ -59,10 +61,8 @@ function initAlienaddaScrollBlurAnimations() {
     return;
   }
 
-  // 1. Hero Section Scroll Blur Out (Alienadda Hero.tsx scrub blur)
+  // 1. Hero Section Scroll Blur Out (Moves UP and blurs away as user scrolls down)
   const heroContent = document.querySelector(".hero-content-wrapper");
-  const heroBg = document.querySelector(".hero-fullframe-bg");
-  
   if (heroContent) {
     gsap.to(heroContent, {
       scrollTrigger: {
@@ -72,54 +72,69 @@ function initAlienaddaScrollBlurAnimations() {
         scrub: true,
       },
       opacity: 0,
-      y: 90,
-      scale: 0.88,
-      filter: "blur(16px)",
+      y: -75, // Drifts up into top blur
+      scale: 0.92,
+      filter: "blur(18px)",
       ease: "none",
     });
   }
 
-  if (heroBg) {
-    gsap.to(heroBg, {
+  // 2. Intro Statement Scrubbed Bidirectional Blur (Alienadda Intro.tsx)
+  // Enters from bottom blur -> holds crystal clear -> exits to top blur
+  const introText = document.getElementById("introStatementText");
+  if (introText) {
+    const introTl = gsap.timeline({
       scrollTrigger: {
-        trigger: "#home",
-        start: "top top",
+        trigger: "#intro",
+        start: "top bottom",
         end: "bottom top",
-        scrub: true,
-      },
-      scale: 1.15,
-      filter: "blur(22px) brightness(50%)",
-      ease: "none",
+        scrub: 1,
+      }
+    });
+
+    introTl.fromTo(introText,
+      { opacity: 0, y: 70, filter: "blur(18px)" },
+      { opacity: 1, y: 0, filter: "blur(0px)", ease: "power1.out", duration: 1 }
+    )
+    .to(introText, {
+      opacity: 1, y: 0, filter: "blur(0px)", duration: 1.2
+    })
+    .to(introText, {
+      opacity: 0, y: -70, filter: "blur(18px)", ease: "power1.in", duration: 1
     });
   }
 
-  // 2. Intro Statement Word-by-Word Blur Reveal (Alienadda Intro.tsx)
-  const words = document.querySelectorAll(".intro-word");
-  if (words.length) {
-    gsap.fromTo(words,
-      { opacity: 0.1, y: 25, filter: "blur(10px)" },
-      {
-        opacity: 1,
-        y: 0,
-        filter: "blur(0px)",
-        duration: 1,
-        stagger: 0.05,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: "#intro",
-          start: "top 75%",
-          end: "bottom 30%",
-          toggleActions: "play reverse play reverse",
-        }
+  // 3. Section Main Points & Headers (.scroll-blur-target)
+  // Bidirectional Scrub: De-blurs on entrance, remains tack-sharp in reading zone,
+  // and blurs upward when scrolling past it.
+  const blurTargets = document.querySelectorAll(".scroll-blur-target");
+  blurTargets.forEach((target) => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: target,
+        start: "top 95%",
+        end: "bottom 5%",
+        scrub: 1,
       }
-    );
-  }
+    });
 
-  // 3. About Section Portrait & Content Blur-to-Focus (Alienadda About.tsx)
+    tl.fromTo(target,
+      { opacity: 0, y: 50, filter: "blur(16px)" },
+      { opacity: 1, y: 0, filter: "blur(0px)", ease: "power1.out", duration: 1 }
+    )
+    .to(target, {
+      opacity: 1, y: 0, filter: "blur(0px)", duration: 1.4
+    })
+    .to(target, {
+      opacity: 0, y: -50, filter: "blur(16px)", ease: "power1.in", duration: 1
+    });
+  });
+
+  // 4. About Section Portrait (Grayscale with Golden Rim)
   const portrait = document.getElementById("aboutPortrait");
   if (portrait) {
     gsap.fromTo(portrait,
-      { opacity: 0.2, scale: 1.15, filter: "blur(20px)" },
+      { opacity: 0.2, scale: 1.12, filter: "blur(20px)" },
       {
         opacity: 1,
         scale: 1,
@@ -134,89 +149,81 @@ function initAlienaddaScrollBlurAnimations() {
     );
   }
 
-  const aboutText = document.querySelector("#about .z-10");
-  if (aboutText) {
-    gsap.fromTo(aboutText,
-      { opacity: 0.2, y: 40, filter: "blur(12px)" },
-      {
-        opacity: 1,
-        y: 0,
-        filter: "blur(0px)",
-        scrollTrigger: {
-          trigger: "#about",
-          start: "top 70%",
-          end: "top 30%",
-          scrub: 1,
-        }
-      }
-    );
-  }
-
-  // 4. Services Section Cards Blur Scrub
+  // 5. Services Section Discipline Cards (Bidirectional Blur Scrub)
   const serviceCards = document.querySelectorAll("#services .glass-card");
   serviceCards.forEach((card) => {
-    gsap.fromTo(card,
-      { opacity: 0.2, y: 50, filter: "blur(14px)" },
-      {
-        opacity: 1,
-        y: 0,
-        filter: "blur(0px)",
-        scrollTrigger: {
-          trigger: card,
-          start: "top 88%",
-          end: "top 55%",
-          scrub: 1,
-        }
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: card,
+        start: "top 95%",
+        end: "bottom 5%",
+        scrub: 1,
       }
-    );
+    });
+
+    tl.fromTo(card,
+      { opacity: 0.15, y: 45, filter: "blur(14px)" },
+      { opacity: 1, y: 0, filter: "blur(0px)", ease: "power1.out", duration: 1 }
+    )
+    .to(card, {
+      opacity: 1, y: 0, filter: "blur(0px)", duration: 1.5
+    })
+    .to(card, {
+      opacity: 0.15, y: -45, filter: "blur(14px)", ease: "power1.in", duration: 1
+    });
   });
 
-  // 5. The Sculpting Process Spatial Nodes Blur (Alienadda Process.tsx)
+  // 6. The Sculpting Process Spatial Nodes Blur (Alienadda Process.tsx)
   const processItems = gsap.utils.toArray(".process-item");
   processItems.forEach((item) => {
     gsap.fromTo(item,
-      { opacity: 0, scale: 0.85, filter: "blur(14px)" },
+      { opacity: 0.1, scale: 0.88, filter: "blur(14px)" },
       {
         opacity: 1,
         scale: 1,
         filter: "blur(0px)",
         scrollTrigger: {
-          trigger: "#process",
-          start: "top 75%",
-          end: "bottom 35%",
-          toggleActions: "play reverse play reverse",
+          trigger: item,
+          start: "top 90%",
+          end: "top 60%",
+          scrub: 1,
         }
       }
     );
   });
 
-  // 6. Portfolio Cards Blur Scrub (Alienadda Projects.tsx)
+  // 7. Portfolio Cards Blur Scrub (Alienadda Projects.tsx)
   initPortfolioCardsBlur();
 
-  // 7. Color Lab Container Blur Scrub
+  // 8. Color Lab Container Blur Scrub
   const colorContainer = document.getElementById("colorComparisonContainer");
   if (colorContainer) {
-    gsap.fromTo(colorContainer,
-      { opacity: 0.3, scale: 0.95, filter: "blur(16px)" },
-      {
-        opacity: 1,
-        scale: 1,
-        filter: "blur(0px)",
-        scrollTrigger: {
-          trigger: colorContainer,
-          start: "top 85%",
-          end: "top 50%",
-          scrub: 1,
-        }
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: colorContainer,
+        start: "top 90%",
+        end: "bottom 10%",
+        scrub: 1,
       }
-    );
+    });
+
+    tl.fromTo(colorContainer,
+      { opacity: 0.2, scale: 0.94, filter: "blur(18px)" },
+      { opacity: 1, scale: 1, filter: "blur(0px)", ease: "power1.out", duration: 1 }
+    )
+    .to(colorContainer, {
+      opacity: 1, scale: 1, filter: "blur(0px)", duration: 1.5
+    })
+    .to(colorContainer, {
+      opacity: 0.2, scale: 0.94, filter: "blur(18px)", ease: "power1.in", duration: 1
+    });
   }
 
-  // 8. Contact Section Enter The World Blur Reveal (Alienadda Contact.tsx)
-  const contactTargets = document.querySelectorAll("#contact .text-center, #contact .glass-card");
+  // 9. Contact Section Enter The World Blur Reveal (Alienadda Contact.tsx)
+  const contactTargets = document.querySelectorAll("#contact .glass-card");
   contactTargets.forEach((target) => {
     gsap.fromTo(target,
-      { opacity: 0.2, y: 40, filter: "blur(16px)" },
+      { opacity: 0.15, y: 40, filter: "blur(16px)" },
       {
         opacity: 1,
         y: 0,
@@ -224,7 +231,7 @@ function initAlienaddaScrollBlurAnimations() {
         scrollTrigger: {
           trigger: target,
           start: "top 85%",
-          end: "top 45%",
+          end: "top 50%",
           scrub: 1,
         }
       }
@@ -236,21 +243,25 @@ function initPortfolioCardsBlur() {
   if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
   const cards = document.querySelectorAll("#portfolioGrid .project-card");
   cards.forEach((card) => {
-    gsap.fromTo(card,
-      { opacity: 0.25, y: 50, filter: "blur(14px)", scale: 0.95 },
-      {
-        opacity: 1,
-        y: 0,
-        filter: "blur(0px)",
-        scale: 1,
-        scrollTrigger: {
-          trigger: card,
-          start: "top 88%",
-          end: "top 55%",
-          scrub: 1,
-        }
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: card,
+        start: "top 95%",
+        end: "bottom 5%",
+        scrub: 1,
       }
-    );
+    });
+
+    tl.fromTo(card,
+      { opacity: 0.2, y: 45, filter: "blur(12px)", scale: 0.96 },
+      { opacity: 1, y: 0, filter: "blur(0px)", scale: 1, ease: "power1.out", duration: 1 }
+    )
+    .to(card, {
+      opacity: 1, y: 0, filter: "blur(0px)", scale: 1, duration: 1.4
+    })
+    .to(card, {
+      opacity: 0.2, y: -45, filter: "blur(12px)", scale: 0.96, ease: "power1.in", duration: 1
+    });
   });
 }
 
@@ -347,22 +358,21 @@ function initNavbar() {
    5. SPATIAL FLOATING PROCESS NODES (ALIENADDA PROCESS.TSX)
    -------------------------------------------------------------------------- */
 function initSpatialProcessNodes() {
-  const items = document.querySelectorAll(".process-item");
+  if (typeof gsap === "undefined") return;
+  const items = gsap.utils.toArray(".process-item");
   if (!items.length) return;
 
   items.forEach((item, index) => {
-    const speed = 2.2 + (index % 3) * 0.7;
-    const distance = 8 + (index % 4) * 3;
-    
-    let time = index * 40;
-    function animateNode() {
-      time += 0.02;
-      const offsetY = Math.sin(time * speed) * distance;
-      const offsetX = Math.cos(time * (speed * 0.7)) * (distance * 0.5);
-      item.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0)`;
-      requestAnimationFrame(animateNode);
-    }
-    requestAnimationFrame(animateNode);
+    // Subtle ambient spatial drift (Alienadda Process.tsx style)
+    gsap.to(item, {
+      y: (index % 2 === 0 ? 1 : -1) * (6 + (index % 3) * 3),
+      x: (index % 3 === 0 ? -1 : 1) * (4 + (index % 2) * 2),
+      duration: 3.5 + (index % 3) * 0.8,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+      delay: index * 0.2,
+    });
   });
 }
 

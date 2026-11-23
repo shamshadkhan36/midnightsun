@@ -51,7 +51,7 @@
       <div class="p-6 md:p-8 space-y-6">
         <div>
           <div class="flex items-center gap-2 mb-3">
-            <img src="assets/images/logo-emblem.jpeg" alt="Midnight Sun Studios" class="w-6 h-6 rounded-full border border-amber-400/50 object-cover" />
+            <img src="assets/images/logo-v2.png" alt="Midnight Sun Studios" class="h-6 w-auto object-contain" />
             <span class="text-[9px] font-mono tracking-widest text-white/50 uppercase">Midnight Sun Studios Archive</span>
           </div>
           ${laurelsHtml}
