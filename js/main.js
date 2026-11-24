@@ -6,6 +6,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   initLenisSmoothScroll();
   initCustomCursor();
+  initHeroEntranceAnimation();
   initNavbar();
   renderPortfolio("all");
   initFilterButtons();
@@ -47,6 +48,54 @@ function initLenisSmoothScroll() {
     } catch (err) {
       console.warn("Lenis init fallback:", err);
     }
+  }
+}
+
+/* --------------------------------------------------------------------------
+   1.5 HERO ENTRANCE FORMATION ANIMATION (ALIENADDA HERO.TSX)
+   Midnight Sun Studios forms dynamically with animation out of blur on pure black
+   -------------------------------------------------------------------------- */
+function initHeroEntranceAnimation() {
+  if (typeof gsap === "undefined") return;
+
+  const heroLogo = document.getElementById("heroLogoImg");
+  const heroGlow = document.querySelector(".hero-sun-glow") || document.querySelector(".ambient-gold-orb");
+  const scrollIndicator = document.querySelector("#home .animate-bounce");
+
+  const tl = gsap.timeline();
+
+  // Midnight Sun forms dynamically with cinematic animation on pure black
+  if (heroLogo) {
+    tl.fromTo(
+      heroLogo,
+      { opacity: 0, scale: 0.82, y: 35, filter: "blur(24px)" },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        filter: "blur(0px)",
+        duration: 2.2,
+        ease: "power4.out",
+      }
+    );
+  }
+
+  if (heroGlow) {
+    tl.fromTo(
+      heroGlow,
+      { opacity: 0, scale: 0.5 },
+      { opacity: 1, scale: 1, duration: 2.5, ease: "power2.out" },
+      "-=1.8"
+    );
+  }
+
+  if (scrollIndicator) {
+    tl.fromTo(
+      scrollIndicator,
+      { opacity: 0, y: -20 },
+      { opacity: 0.35, y: 0, duration: 1.2, ease: "power2.out" },
+      "-=0.8"
+    );
   }
 }
 
@@ -336,22 +385,35 @@ function initCustomCursor() {
 }
 
 /* --------------------------------------------------------------------------
-   4. NAVBAR SCROLL
+   4. NAVBAR SCROLL — VISIBILITY CONTROLLED BY SCROLL POSITION
+   First frame has NO visible navbar/tabs. When scrolling down past the first frame,
+   navbar slides in smoothly with backdrop blur.
    -------------------------------------------------------------------------- */
 function initNavbar() {
   const navbar = document.getElementById("mainNavbar");
   if (!navbar) return;
 
-  const onScroll = () => {
-    if (window.scrollY > 40) {
-      navbar.classList.add("navbar-scrolled");
+  const updateNavbarVisibility = () => {
+    const scrollPos = window.scrollY || document.documentElement.scrollTop;
+    // Reveal only after scrolling past the first frame (~35% of viewport height)
+    if (scrollPos > window.innerHeight * 0.35) {
+      navbar.classList.add("navbar-visible");
+      if (scrollPos > window.innerHeight * 0.7) {
+        navbar.classList.add("navbar-scrolled");
+      } else {
+        navbar.classList.remove("navbar-scrolled");
+      }
     } else {
+      navbar.classList.remove("navbar-visible");
       navbar.classList.remove("navbar-scrolled");
     }
   };
 
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
+  window.addEventListener("scroll", updateNavbarVisibility, { passive: true });
+  if (typeof lenis !== "undefined" && lenis) {
+    lenis.on("scroll", updateNavbarVisibility);
+  }
+  updateNavbarVisibility();
 }
 
 /* --------------------------------------------------------------------------

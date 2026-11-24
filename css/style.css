@@ -180,23 +180,32 @@ h1, h2, h3, h4, .font-heading {
   color: #ffffff;
 }
 
-/* Sticky Navbar */
+/* Sticky Navbar — Hidden on First Frame (Hero), Appears Smoothly on Scroll */
 .navbar-sticky {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 1.25rem 2.5rem;
-  transition: var(--transition-smooth);
-}
-.navbar-scrolled {
-  background: rgba(0, 0, 0, 0.9);
+  padding: 0.9rem 2.5rem;
+  opacity: 0;
+  transform: translateY(-24px);
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 0.85rem 2.5rem;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.85);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.navbar-sticky.navbar-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.navbar-scrolled {
+  padding: 0.75rem 2.5rem;
+  background: rgba(0, 0, 0, 0.92);
 }
 
 .nav-link {
